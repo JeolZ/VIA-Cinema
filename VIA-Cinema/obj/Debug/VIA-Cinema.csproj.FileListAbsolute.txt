@@ -51,8 +51,8 @@ C:\Users\Roberto\Documents\projects\Via-Cinema\VIA-Cinema\bin\roslyn\VBCSCompile
 C:\Users\Roberto\Documents\projects\Via-Cinema\VIA-Cinema\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\Roberto\Documents\projects\Via-Cinema\VIA-Cinema\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\Roberto\Documents\projects\Via-Cinema\VIA-Cinema\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\Roberto\Documents\projects\Via-Cinema\VIA-Cinema\obj\Debug\VIA-Cinema.csprojResolveAssemblyReference.cache
 C:\Users\Roberto\Documents\projects\Via-Cinema\VIA-Cinema\obj\Debug\VIA-Cinema.csproj.CoreCompileInputs.cache
 C:\Users\Roberto\Documents\projects\Via-Cinema\VIA-Cinema\obj\Debug\VIA-Cinema.csproj.CopyComplete
 C:\Users\Roberto\Documents\projects\Via-Cinema\VIA-Cinema\obj\Debug\VIA-Cinema.dll
 C:\Users\Roberto\Documents\projects\Via-Cinema\VIA-Cinema\obj\Debug\VIA-Cinema.pdb
+C:\Users\Roberto\Documents\projects\Via-Cinema\VIA-Cinema\obj\Debug\VIA-Cinema.csprojResolveAssemblyReference.cache

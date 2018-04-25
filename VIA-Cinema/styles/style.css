@@ -1,6 +1,8 @@
 ﻿#header, #headerTop, #headerBottom, #content, #contentTop, #mainContent, #footer {
     float: left;
     clear: both;
+    width: 100%;
+    min-width: 360px;
 }
 
 #logo, #headerTop, #headerBottom, #login {
@@ -41,6 +43,38 @@
     float: right !important;
 }
 
-.topMenu ul li{
+.topMenu ul li {
     margin: 0 5px;
+}
+
+.topMenu ul li a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.topMenu ul li:last-child { /*Login button*/
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#hamburger {
+    float: right;
+    width: 30px;
+    margin: 10px;
+    cursor: pointer;
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .topMenu {
+        display: none;
+    }
+
+    #hamburger {
+        display: inline-block;
+    }
+
+    #logo {
+        width: 150px;
+    }
 }

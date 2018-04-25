@@ -17,12 +17,10 @@
                     <div id="logo">
                         LOGO
                     </div>
-                    <div id="login">
-                        LOGIN
-                    </div>
-                    <div id="menu">
+                    <nav id="menu">
+                        <img src="images/hamburger-icon.svg" id="hamburger" />
                         <asp:Menu ID="Menu1" DataSourceID="SiteMapDataSource1" StaticDisplayLevels="2" Orientation="Horizontal" CssClass="topMenu" runat="server"></asp:Menu>
-                    </div>
+                    </nav>
                 </div>
                 <div id="headerBottom">
                     <asp:ContentPlaceHolder ID="headerContent" runat="server">
