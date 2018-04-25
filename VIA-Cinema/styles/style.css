@@ -1,0 +1,37 @@
+﻿#logo, #menu, #headerTop, #headerBottom, #login {
+    padding: 10px;
+    text-align: center;
+}
+
+#login {
+    float: right;
+    width: 60px;
+}
+
+#logo {
+    float: left;
+    width: 180px;
+}
+
+#headerTop, #headerBottom {
+    float: left;
+    width: 100%;
+}
+
+.contentTop, .mainContent {
+    padding: 10px;
+}
+
+.contentTop {
+    font-weight: bold;
+}
+
+#footer {
+    padding: 10px;
+    text-align: center;
+}
+
+.topMenu {
+    float: none;
+    margin: 0 auto;
+}
