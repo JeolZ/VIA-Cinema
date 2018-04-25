@@ -1,4 +1,7 @@
-﻿#logo, #menu, #headerTop, #headerBottom, #login {
+﻿#header, #headerTop, #headerBottom, #content, #contentTop, #mainContent, #footer {
+    float: left;
+
+#logo, #headerTop, #headerBottom, #login {
     padding: 10px;
     text-align: center;
 }
@@ -32,6 +35,10 @@
 }
 
 .topMenu {
-    float: none;
-    margin: 0 auto;
+    margin: 10px 10px;
+    float: right !important;
+}
+
+.topMenu ul li{
+    margin: 0 5px;
 }
