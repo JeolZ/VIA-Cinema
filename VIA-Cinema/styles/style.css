@@ -1,5 +1,7 @@
 ﻿#header, #headerTop, #headerBottom, #content, #contentTop, #mainContent, #footer {
     float: left;
+    clear: both;
+}
 
 #logo, #headerTop, #headerBottom, #login {
     padding: 10px;
