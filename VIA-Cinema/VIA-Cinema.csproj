@@ -67,6 +67,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="about.aspx" />
+    <Content Include="App_Data\Via-Cinema_Database.mdf" />
+    <Content Include="App_Data\Via-Cinema_Database_log.ldf">
+      <DependentUpon>Via-Cinema_Database.mdf</DependentUpon>
+    </Content>
     <Content Include="contact-us.aspx" />
     <Content Include="index.aspx" />
     <Content Include="MasterPage.Master" />
