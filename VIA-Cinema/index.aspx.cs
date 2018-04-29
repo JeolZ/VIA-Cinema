@@ -11,7 +11,6 @@ namespace VIA_Cinema
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
     }
 }
