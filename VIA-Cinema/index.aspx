@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="VIA_Cinema.index" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>VIA Cinema</title>
     <style>
@@ -7,13 +8,19 @@
         }
     </style>
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="headerContent" runat="server">
     HERE a SLIDESHOW with "Coming soon" and "Just released" movies<br />
     The SLIDESHOW changes the header background image
 </asp:Content>
+
 <asp:Content ID="Content3" ContentPlaceHolderID="contentTop" runat="server">
     Don't know yet (this should be a "title" for the content below)
 </asp:Content>
+
 <asp:Content ID="Content4" ContentPlaceHolderID="mainContent" runat="server">
     Don't know yet (this should be an important content for the page)
+    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label><br />
+    <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label><br />
+    <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label><br />
 </asp:Content>
