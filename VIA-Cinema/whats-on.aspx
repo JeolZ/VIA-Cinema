@@ -8,8 +8,11 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="headerContent" runat="server">
+    <h1>What's on</h1>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="contentTop" runat="server">
+    <h3>This week movies</h3>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="mainContent" runat="server">
+    <div id="weekMovies" runat="server"></div>
 </asp:Content>

@@ -15,14 +15,6 @@ namespace VIA_Cinema
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Web service
-            localhost.VIACinemaService via = new localhost.VIACinemaService();
-
-            localhost.Movie[] m = via.GetMovies();
-            
-            Label1.Text = m[0].ToString();
-            Label2.Text = m[1].ToString();
-            Label3.Text = m[2].ToString();
         }
     }
 }

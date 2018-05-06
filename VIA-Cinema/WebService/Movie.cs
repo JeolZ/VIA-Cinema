@@ -8,6 +8,7 @@ namespace VIA_Cinema.WebService
     [Serializable]
     public class Movie
     {
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public int Duration { get; set; }
@@ -18,8 +19,9 @@ namespace VIA_Cinema.WebService
         {
         }
 
-        public Movie(string t, string d, int dur, string rd, Show[] s)
+        public Movie(int id, string t, string d, int dur, string rd, Show[] s)
         {
+            Id = id;
             Title = t;
             Description = d;
             Duration = dur;

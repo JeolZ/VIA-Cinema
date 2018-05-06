@@ -2,13 +2,13 @@
 <wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://localhost/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://localhost/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://localhost/">
-      <s:element name="GetMovies">
+      <s:element name="GetAllMovies">
         <s:complexType />
       </s:element>
-      <s:element name="GetMoviesResponse">
+      <s:element name="GetAllMoviesResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetMoviesResult" type="tns:ArrayOfMovie" />
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllMoviesResult" type="tns:ArrayOfMovie" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -19,6 +19,7 @@
       </s:complexType>
       <s:complexType name="Movie">
         <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
           <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="Duration" type="s:int" />
@@ -33,29 +34,95 @@
       </s:complexType>
       <s:complexType name="Show">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="1" name="Date" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="Time" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:dateTime" />
           <s:element minOccurs="1" maxOccurs="1" name="Room" type="s:int" />
         </s:sequence>
       </s:complexType>
+      <s:element name="GetMoviesOfDay">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="day" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMoviesOfDayResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMoviesOfDayResult" type="tns:ArrayOfMovie" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMovieInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMovieInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMovieInfoResult" type="tns:Movie" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
-  <wsdl:message name="GetMoviesSoapIn">
-    <wsdl:part name="parameters" element="tns:GetMovies" />
+  <wsdl:message name="GetAllMoviesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllMovies" />
   </wsdl:message>
-  <wsdl:message name="GetMoviesSoapOut">
-    <wsdl:part name="parameters" element="tns:GetMoviesResponse" />
+  <wsdl:message name="GetAllMoviesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllMoviesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMoviesOfDaySoapIn">
+    <wsdl:part name="parameters" element="tns:GetMoviesOfDay" />
+  </wsdl:message>
+  <wsdl:message name="GetMoviesOfDaySoapOut">
+    <wsdl:part name="parameters" element="tns:GetMoviesOfDayResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMovieInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMovieInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetMovieInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMovieInfoResponse" />
   </wsdl:message>
   <wsdl:portType name="VIACinemaServiceSoap">
-    <wsdl:operation name="GetMovies">
-      <wsdl:input message="tns:GetMoviesSoapIn" />
-      <wsdl:output message="tns:GetMoviesSoapOut" />
+    <wsdl:operation name="GetAllMovies">
+      <wsdl:input message="tns:GetAllMoviesSoapIn" />
+      <wsdl:output message="tns:GetAllMoviesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMoviesOfDay">
+      <wsdl:input message="tns:GetMoviesOfDaySoapIn" />
+      <wsdl:output message="tns:GetMoviesOfDaySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMovieInfo">
+      <wsdl:input message="tns:GetMovieInfoSoapIn" />
+      <wsdl:output message="tns:GetMovieInfoSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="VIACinemaServiceSoap" type="tns:VIACinemaServiceSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="GetMovies">
-      <soap:operation soapAction="http://localhost/GetMovies" style="document" />
+    <wsdl:operation name="GetAllMovies">
+      <soap:operation soapAction="http://localhost/GetAllMovies" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMoviesOfDay">
+      <soap:operation soapAction="http://localhost/GetMoviesOfDay" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMovieInfo">
+      <soap:operation soapAction="http://localhost/GetMovieInfo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -66,8 +133,26 @@
   </wsdl:binding>
   <wsdl:binding name="VIACinemaServiceSoap12" type="tns:VIACinemaServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="GetMovies">
-      <soap12:operation soapAction="http://localhost/GetMovies" style="document" />
+    <wsdl:operation name="GetAllMovies">
+      <soap12:operation soapAction="http://localhost/GetAllMovies" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMoviesOfDay">
+      <soap12:operation soapAction="http://localhost/GetMoviesOfDay" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMovieInfo">
+      <soap12:operation soapAction="http://localhost/GetMovieInfo" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

@@ -8,18 +8,18 @@ namespace VIA_Cinema.WebService
     [Serializable]
     public class Show
     {
-        public string Date { get; set; }
-        public string Time { get; set; }
+        public int Id { get; set; }
+        public DateTime Date { get; set; }
         public int Room { get; set; }
 
         public Show()
         {
         }
 
-        public Show(string d, string t, int r)
+        public Show(int id, DateTime d, int r)
         {
+            Id = id;
             Date = d;
-            Time = t;
             Room = r;
         }
     }

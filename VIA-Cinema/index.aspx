@@ -20,7 +20,4 @@
 
 <asp:Content ID="Content4" ContentPlaceHolderID="mainContent" runat="server">
     Don't know yet (this should be an important content for the page)
-    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label><br />
-    <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label><br />
-    <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label><br />
 </asp:Content>

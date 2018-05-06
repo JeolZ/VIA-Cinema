@@ -81,16 +81,17 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Content Include="WebService\VIACinemaService.asmx" />
-    <Content Include="whats-on.aspx" />
-    <None Include="packages.config" />
     <Content Include="Web References\localhost\Movie.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
-    <None Include="Web References\localhost\Reference.map">
+    <Content Include="Web References\localhost\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
+    </Content>
+    <None Include="Web References\localhost\VIACinemaService.disco" />
+    <Content Include="WebService\VIACinemaService.asmx" />
+    <Content Include="whats-on.aspx" />
+    <None Include="packages.config" />
     <None Include="Web References\localhost\VIACinemaService.wsdl" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -171,10 +172,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://localhost:52492/WebService/VIACinemaService.asmx%3fWSDL">
+    <WebReferenceUrl Include="http://localhost:52492/WebService/VIACinemaService.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\localhost\</RelPath>
-      <UpdateFromURL>http://localhost:52492/WebService/VIACinemaService.asmx%3fWSDL</UpdateFromURL>
+      <UpdateFromURL>http://localhost:52492/WebService/VIACinemaService.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
