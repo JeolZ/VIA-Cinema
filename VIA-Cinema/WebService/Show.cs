@@ -11,16 +11,18 @@ namespace VIA_Cinema.WebService
         public int Id { get; set; }
         public DateTime Date { get; set; }
         public int Room { get; set; }
+        public int TotalSeats { get; set; }
 
         public Show()
         {
         }
 
-        public Show(int id, DateTime d, int r)
+        public Show(int id, DateTime d, int r, int ts)
         {
             Id = id;
             Date = d;
             Room = r;
+            TotalSeats = ts;
         }
     }
 }

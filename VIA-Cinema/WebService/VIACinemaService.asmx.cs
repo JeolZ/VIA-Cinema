@@ -69,9 +69,10 @@ namespace VIA_Cinema.WebService
             {
                 query   +=  @", S.ShowId AS ShowID,
                                 S.Date AS Date,
-                                S.RoomId AS RoomId
-                                FROM Movies AS M, Shows AS S
-                                WHERE M.MovieID=S.MovieID";
+                                S.RoomId AS RoomId,
+                                COUNT(*) AS TotalSeats
+                                FROM Movies AS M, Shows AS S, Seats AS Se
+                                WHERE M.MovieID=S.MovieID, Se.RoomID=S.RoomID";
                 if (days >= 0)
                     query += " AND CONVERT(date, S.Date) = CONVERT(date, GETDATE( )+"+days+")";
                 else
@@ -80,6 +81,7 @@ namespace VIA_Cinema.WebService
                 if (id > 0)
                     query += " AND M.MovieId = " + id;
 
+                query += " GROUP BY S.ShowID, S.Date, S.RoomId";
                 query += " ORDER BY M.MovieId, S.Date, S.ShowId ASC";
             }
 
@@ -111,7 +113,8 @@ namespace VIA_Cinema.WebService
                                 System.Globalization.CultureInfo.InvariantCulture);
                             shows.Add(new Show( showId,
                                                 date,
-                                                Int32.Parse(rd["RoomId"].ToString())
+                                                Int32.Parse(rd["RoomId"].ToString()),
+                                                Int32.Parse(rd["TotalSeats"].ToString())
                                               ));
                         } while ((more = rd.Read()) && (curId = Int32.Parse(rd["MovieID"].ToString())) == preId);
 
@@ -122,7 +125,7 @@ namespace VIA_Cinema.WebService
                 }
             }
 
-            return t.OrderBy(o=>o.ReleaseDate).ToArray();
+            return t.ToArray();
 
         }
     }
