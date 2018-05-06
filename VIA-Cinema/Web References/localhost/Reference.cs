@@ -33,6 +33,8 @@ namespace VIA_Cinema.localhost {
         
         private System.Threading.SendOrPostCallback GetMoviesOfDayOperationCompleted;
         
+        private System.Threading.SendOrPostCallback GetShowsOfDayOperationCompleted;
+        
         private System.Threading.SendOrPostCallback GetMovieInfoOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
@@ -80,10 +82,14 @@ namespace VIA_Cinema.localhost {
         public event GetMoviesOfDayCompletedEventHandler GetMoviesOfDayCompleted;
         
         /// <remarks/>
+        public event GetShowsOfDayCompletedEventHandler GetShowsOfDayCompleted;
+        
+        /// <remarks/>
         public event GetMovieInfoCompletedEventHandler GetMovieInfoCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://localhost/GetAllMovies", RequestNamespace="http://localhost/", ResponseNamespace="http://localhost/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://localhost/Get all movies from today", RequestElementName="Get all movies from today", RequestNamespace="http://localhost/", ResponseElementName="Get all movies from todayResponse", ResponseNamespace="http://localhost/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlArrayAttribute("Get all movies from todayResult")]
         public Movie[] GetAllMovies() {
             object[] results = this.Invoke("GetAllMovies", new object[0]);
             return ((Movie[])(results[0]));
@@ -110,7 +116,8 @@ namespace VIA_Cinema.localhost {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://localhost/GetMoviesOfDay", RequestNamespace="http://localhost/", ResponseNamespace="http://localhost/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://localhost/Get shows of all movies of \"day\" days from today", RequestElementName="Get shows of all movies of \"day\" days from today", RequestNamespace="http://localhost/", ResponseElementName="Get shows of all movies of \"day\" days from todayResponse", ResponseNamespace="http://localhost/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlArrayAttribute("Get shows of all movies of \"day\" days from todayResult")]
         public Movie[] GetMoviesOfDay(int day) {
             object[] results = this.Invoke("GetMoviesOfDay", new object[] {
                         day});
@@ -139,7 +146,41 @@ namespace VIA_Cinema.localhost {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://localhost/GetMovieInfo", RequestNamespace="http://localhost/", ResponseNamespace="http://localhost/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://localhost/Get shows of \"day\" days from toda for the movie with MovieID = i" +
+            "d", RequestElementName="Get shows of \"day\" days from toda for the movie with MovieID = id", RequestNamespace="http://localhost/", ResponseElementName="Get shows of \"day\" days from toda for the movie with MovieID = idResponse", ResponseNamespace="http://localhost/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlArrayAttribute("Get shows of \"day\" days from toda for the movie with MovieID = idResult")]
+        public Movie[] GetShowsOfDay(int id, int day) {
+            object[] results = this.Invoke("GetShowsOfDay", new object[] {
+                        id,
+                        day});
+            return ((Movie[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetShowsOfDayAsync(int id, int day) {
+            this.GetShowsOfDayAsync(id, day, null);
+        }
+        
+        /// <remarks/>
+        public void GetShowsOfDayAsync(int id, int day, object userState) {
+            if ((this.GetShowsOfDayOperationCompleted == null)) {
+                this.GetShowsOfDayOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetShowsOfDayOperationCompleted);
+            }
+            this.InvokeAsync("GetShowsOfDay", new object[] {
+                        id,
+                        day}, this.GetShowsOfDayOperationCompleted, userState);
+        }
+        
+        private void OnGetShowsOfDayOperationCompleted(object arg) {
+            if ((this.GetShowsOfDayCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetShowsOfDayCompleted(this, new GetShowsOfDayCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://localhost/Get just movie info, without shows", RequestElementName="Get just movie info, without shows", RequestNamespace="http://localhost/", ResponseElementName="Get just movie info, without showsResponse", ResponseNamespace="http://localhost/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("Get just movie info, without showsResult")]
         public Movie GetMovieInfo(int id) {
             object[] results = this.Invoke("GetMovieInfo", new object[] {
                         id});
@@ -351,6 +392,32 @@ namespace VIA_Cinema.localhost {
         private object[] results;
         
         internal GetMoviesOfDayCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Movie[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Movie[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
+    public delegate void GetShowsOfDayCompletedEventHandler(object sender, GetShowsOfDayCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetShowsOfDayCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetShowsOfDayCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

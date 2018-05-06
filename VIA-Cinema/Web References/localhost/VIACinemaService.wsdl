@@ -2,13 +2,13 @@
 <wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://localhost/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://localhost/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://localhost/">
-      <s:element name="GetAllMovies">
+      <s:element name="Get_x0020_all_x0020_movies_x0020_from_x0020_today">
         <s:complexType />
       </s:element>
-      <s:element name="GetAllMoviesResponse">
+      <s:element name="Get_x0020_all_x0020_movies_x0020_from_x0020_todayResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetAllMoviesResult" type="tns:ArrayOfMovie" />
+            <s:element minOccurs="0" maxOccurs="1" name="Get_x0020_all_x0020_movies_x0020_from_x0020_todayResult" type="tns:ArrayOfMovie" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -39,94 +39,128 @@
           <s:element minOccurs="1" maxOccurs="1" name="Room" type="s:int" />
         </s:sequence>
       </s:complexType>
-      <s:element name="GetMoviesOfDay">
+      <s:element name="Get_x0020_shows_x0020_of_x0020_all_x0020_movies_x0020_of_x0020__x0022_day_x0022__x0020_days_x0020_from_x0020_today">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="1" maxOccurs="1" name="day" type="s:int" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="GetMoviesOfDayResponse">
+      <s:element name="Get_x0020_shows_x0020_of_x0020_all_x0020_movies_x0020_of_x0020__x0022_day_x0022__x0020_days_x0020_from_x0020_todayResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetMoviesOfDayResult" type="tns:ArrayOfMovie" />
+            <s:element minOccurs="0" maxOccurs="1" name="Get_x0020_shows_x0020_of_x0020_all_x0020_movies_x0020_of_x0020__x0022_day_x0022__x0020_days_x0020_from_x0020_todayResult" type="tns:ArrayOfMovie" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="GetMovieInfo">
+      <s:element name="Get_x0020_shows_x0020_of_x0020__x0022_day_x0022__x0020_days_x0020_from_x0020_toda_x0020_for_x0020_the_x0020_movie_x0020_with_x0020_MovieID_x0020__x003D__x0020_id">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="day" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_x0020_shows_x0020_of_x0020__x0022_day_x0022__x0020_days_x0020_from_x0020_toda_x0020_for_x0020_the_x0020_movie_x0020_with_x0020_MovieID_x0020__x003D__x0020_idResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_x0020_shows_x0020_of_x0020__x0022_day_x0022__x0020_days_x0020_from_x0020_toda_x0020_for_x0020_the_x0020_movie_x0020_with_x0020_MovieID_x0020__x003D__x0020_idResult" type="tns:ArrayOfMovie" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_x0020_just_x0020_movie_x0020_info_x002C__x0020_without_x0020_shows">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="GetMovieInfoResponse">
+      <s:element name="Get_x0020_just_x0020_movie_x0020_info_x002C__x0020_without_x0020_showsResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetMovieInfoResult" type="tns:Movie" />
+            <s:element minOccurs="0" maxOccurs="1" name="Get_x0020_just_x0020_movie_x0020_info_x002C__x0020_without_x0020_showsResult" type="tns:Movie" />
           </s:sequence>
         </s:complexType>
       </s:element>
     </s:schema>
   </wsdl:types>
-  <wsdl:message name="GetAllMoviesSoapIn">
-    <wsdl:part name="parameters" element="tns:GetAllMovies" />
+  <wsdl:message name="Get_x0020_all_x0020_movies_x0020_from_x0020_todaySoapIn">
+    <wsdl:part name="parameters" element="tns:Get_x0020_all_x0020_movies_x0020_from_x0020_today" />
   </wsdl:message>
-  <wsdl:message name="GetAllMoviesSoapOut">
-    <wsdl:part name="parameters" element="tns:GetAllMoviesResponse" />
+  <wsdl:message name="Get_x0020_all_x0020_movies_x0020_from_x0020_todaySoapOut">
+    <wsdl:part name="parameters" element="tns:Get_x0020_all_x0020_movies_x0020_from_x0020_todayResponse" />
   </wsdl:message>
-  <wsdl:message name="GetMoviesOfDaySoapIn">
-    <wsdl:part name="parameters" element="tns:GetMoviesOfDay" />
+  <wsdl:message name="Get_x0020_shows_x0020_of_x0020_all_x0020_movies_x0020_of_x0020__x0022_day_x0022__x0020_days_x0020_from_x0020_todaySoapIn">
+    <wsdl:part name="parameters" element="tns:Get_x0020_shows_x0020_of_x0020_all_x0020_movies_x0020_of_x0020__x0022_day_x0022__x0020_days_x0020_from_x0020_today" />
   </wsdl:message>
-  <wsdl:message name="GetMoviesOfDaySoapOut">
-    <wsdl:part name="parameters" element="tns:GetMoviesOfDayResponse" />
+  <wsdl:message name="Get_x0020_shows_x0020_of_x0020_all_x0020_movies_x0020_of_x0020__x0022_day_x0022__x0020_days_x0020_from_x0020_todaySoapOut">
+    <wsdl:part name="parameters" element="tns:Get_x0020_shows_x0020_of_x0020_all_x0020_movies_x0020_of_x0020__x0022_day_x0022__x0020_days_x0020_from_x0020_todayResponse" />
   </wsdl:message>
-  <wsdl:message name="GetMovieInfoSoapIn">
-    <wsdl:part name="parameters" element="tns:GetMovieInfo" />
+  <wsdl:message name="Get_x0020_shows_x0020_of_x0020__x0022_day_x0022__x0020_days_x0020_from_x0020_toda_x0020_for_x0020_the_x0020_movie_x0020_with_x0020_MovieID_x0020__x003D__x0020_idSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_x0020_shows_x0020_of_x0020__x0022_day_x0022__x0020_days_x0020_from_x0020_toda_x0020_for_x0020_the_x0020_movie_x0020_with_x0020_MovieID_x0020__x003D__x0020_id" />
   </wsdl:message>
-  <wsdl:message name="GetMovieInfoSoapOut">
-    <wsdl:part name="parameters" element="tns:GetMovieInfoResponse" />
+  <wsdl:message name="Get_x0020_shows_x0020_of_x0020__x0022_day_x0022__x0020_days_x0020_from_x0020_toda_x0020_for_x0020_the_x0020_movie_x0020_with_x0020_MovieID_x0020__x003D__x0020_idSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_x0020_shows_x0020_of_x0020__x0022_day_x0022__x0020_days_x0020_from_x0020_toda_x0020_for_x0020_the_x0020_movie_x0020_with_x0020_MovieID_x0020__x003D__x0020_idResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_x0020_just_x0020_movie_x0020_info_x002C__x0020_without_x0020_showsSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_x0020_just_x0020_movie_x0020_info_x002C__x0020_without_x0020_shows" />
+  </wsdl:message>
+  <wsdl:message name="Get_x0020_just_x0020_movie_x0020_info_x002C__x0020_without_x0020_showsSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_x0020_just_x0020_movie_x0020_info_x002C__x0020_without_x0020_showsResponse" />
   </wsdl:message>
   <wsdl:portType name="VIACinemaServiceSoap">
     <wsdl:operation name="GetAllMovies">
-      <wsdl:input message="tns:GetAllMoviesSoapIn" />
-      <wsdl:output message="tns:GetAllMoviesSoapOut" />
+      <wsdl:input name="Get_x0020_all_x0020_movies_x0020_from_x0020_today" message="tns:Get_x0020_all_x0020_movies_x0020_from_x0020_todaySoapIn" />
+      <wsdl:output name="Get_x0020_all_x0020_movies_x0020_from_x0020_today" message="tns:Get_x0020_all_x0020_movies_x0020_from_x0020_todaySoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetMoviesOfDay">
-      <wsdl:input message="tns:GetMoviesOfDaySoapIn" />
-      <wsdl:output message="tns:GetMoviesOfDaySoapOut" />
+      <wsdl:input name="Get_x0020_shows_x0020_of_x0020_all_x0020_movies_x0020_of_x0020__x0022_day_x0022__x0020_days_x0020_from_x0020_today" message="tns:Get_x0020_shows_x0020_of_x0020_all_x0020_movies_x0020_of_x0020__x0022_day_x0022__x0020_days_x0020_from_x0020_todaySoapIn" />
+      <wsdl:output name="Get_x0020_shows_x0020_of_x0020_all_x0020_movies_x0020_of_x0020__x0022_day_x0022__x0020_days_x0020_from_x0020_today" message="tns:Get_x0020_shows_x0020_of_x0020_all_x0020_movies_x0020_of_x0020__x0022_day_x0022__x0020_days_x0020_from_x0020_todaySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetShowsOfDay">
+      <wsdl:input name="Get_x0020_shows_x0020_of_x0020__x0022_day_x0022__x0020_days_x0020_from_x0020_toda_x0020_for_x0020_the_x0020_movie_x0020_with_x0020_MovieID_x0020__x003D__x0020_id" message="tns:Get_x0020_shows_x0020_of_x0020__x0022_day_x0022__x0020_days_x0020_from_x0020_toda_x0020_for_x0020_the_x0020_movie_x0020_with_x0020_MovieID_x0020__x003D__x0020_idSoapIn" />
+      <wsdl:output name="Get_x0020_shows_x0020_of_x0020__x0022_day_x0022__x0020_days_x0020_from_x0020_toda_x0020_for_x0020_the_x0020_movie_x0020_with_x0020_MovieID_x0020__x003D__x0020_id" message="tns:Get_x0020_shows_x0020_of_x0020__x0022_day_x0022__x0020_days_x0020_from_x0020_toda_x0020_for_x0020_the_x0020_movie_x0020_with_x0020_MovieID_x0020__x003D__x0020_idSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetMovieInfo">
-      <wsdl:input message="tns:GetMovieInfoSoapIn" />
-      <wsdl:output message="tns:GetMovieInfoSoapOut" />
+      <wsdl:input name="Get_x0020_just_x0020_movie_x0020_info_x002C__x0020_without_x0020_shows" message="tns:Get_x0020_just_x0020_movie_x0020_info_x002C__x0020_without_x0020_showsSoapIn" />
+      <wsdl:output name="Get_x0020_just_x0020_movie_x0020_info_x002C__x0020_without_x0020_shows" message="tns:Get_x0020_just_x0020_movie_x0020_info_x002C__x0020_without_x0020_showsSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="VIACinemaServiceSoap" type="tns:VIACinemaServiceSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="GetAllMovies">
-      <soap:operation soapAction="http://localhost/GetAllMovies" style="document" />
-      <wsdl:input>
+      <soap:operation soapAction="http://localhost/Get all movies from today" style="document" />
+      <wsdl:input name="Get_x0020_all_x0020_movies_x0020_from_x0020_today">
         <soap:body use="literal" />
       </wsdl:input>
-      <wsdl:output>
+      <wsdl:output name="Get_x0020_all_x0020_movies_x0020_from_x0020_today">
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetMoviesOfDay">
-      <soap:operation soapAction="http://localhost/GetMoviesOfDay" style="document" />
-      <wsdl:input>
+      <soap:operation soapAction="http://localhost/Get shows of all movies of &quot;day&quot; days from today" style="document" />
+      <wsdl:input name="Get_x0020_shows_x0020_of_x0020_all_x0020_movies_x0020_of_x0020__x0022_day_x0022__x0020_days_x0020_from_x0020_today">
         <soap:body use="literal" />
       </wsdl:input>
-      <wsdl:output>
+      <wsdl:output name="Get_x0020_shows_x0020_of_x0020_all_x0020_movies_x0020_of_x0020__x0022_day_x0022__x0020_days_x0020_from_x0020_today">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetShowsOfDay">
+      <soap:operation soapAction="http://localhost/Get shows of &quot;day&quot; days from toda for the movie with MovieID = id" style="document" />
+      <wsdl:input name="Get_x0020_shows_x0020_of_x0020__x0022_day_x0022__x0020_days_x0020_from_x0020_toda_x0020_for_x0020_the_x0020_movie_x0020_with_x0020_MovieID_x0020__x003D__x0020_id">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="Get_x0020_shows_x0020_of_x0020__x0022_day_x0022__x0020_days_x0020_from_x0020_toda_x0020_for_x0020_the_x0020_movie_x0020_with_x0020_MovieID_x0020__x003D__x0020_id">
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetMovieInfo">
-      <soap:operation soapAction="http://localhost/GetMovieInfo" style="document" />
-      <wsdl:input>
+      <soap:operation soapAction="http://localhost/Get just movie info, without shows" style="document" />
+      <wsdl:input name="Get_x0020_just_x0020_movie_x0020_info_x002C__x0020_without_x0020_shows">
         <soap:body use="literal" />
       </wsdl:input>
-      <wsdl:output>
+      <wsdl:output name="Get_x0020_just_x0020_movie_x0020_info_x002C__x0020_without_x0020_shows">
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
@@ -134,29 +168,38 @@
   <wsdl:binding name="VIACinemaServiceSoap12" type="tns:VIACinemaServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="GetAllMovies">
-      <soap12:operation soapAction="http://localhost/GetAllMovies" style="document" />
-      <wsdl:input>
+      <soap12:operation soapAction="http://localhost/Get all movies from today" style="document" />
+      <wsdl:input name="Get_x0020_all_x0020_movies_x0020_from_x0020_today">
         <soap12:body use="literal" />
       </wsdl:input>
-      <wsdl:output>
+      <wsdl:output name="Get_x0020_all_x0020_movies_x0020_from_x0020_today">
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetMoviesOfDay">
-      <soap12:operation soapAction="http://localhost/GetMoviesOfDay" style="document" />
-      <wsdl:input>
+      <soap12:operation soapAction="http://localhost/Get shows of all movies of &quot;day&quot; days from today" style="document" />
+      <wsdl:input name="Get_x0020_shows_x0020_of_x0020_all_x0020_movies_x0020_of_x0020__x0022_day_x0022__x0020_days_x0020_from_x0020_today">
         <soap12:body use="literal" />
       </wsdl:input>
-      <wsdl:output>
+      <wsdl:output name="Get_x0020_shows_x0020_of_x0020_all_x0020_movies_x0020_of_x0020__x0022_day_x0022__x0020_days_x0020_from_x0020_today">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetShowsOfDay">
+      <soap12:operation soapAction="http://localhost/Get shows of &quot;day&quot; days from toda for the movie with MovieID = id" style="document" />
+      <wsdl:input name="Get_x0020_shows_x0020_of_x0020__x0022_day_x0022__x0020_days_x0020_from_x0020_toda_x0020_for_x0020_the_x0020_movie_x0020_with_x0020_MovieID_x0020__x003D__x0020_id">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="Get_x0020_shows_x0020_of_x0020__x0022_day_x0022__x0020_days_x0020_from_x0020_toda_x0020_for_x0020_the_x0020_movie_x0020_with_x0020_MovieID_x0020__x003D__x0020_id">
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetMovieInfo">
-      <soap12:operation soapAction="http://localhost/GetMovieInfo" style="document" />
-      <wsdl:input>
+      <soap12:operation soapAction="http://localhost/Get just movie info, without shows" style="document" />
+      <wsdl:input name="Get_x0020_just_x0020_movie_x0020_info_x002C__x0020_without_x0020_shows">
         <soap12:body use="literal" />
       </wsdl:input>
-      <wsdl:output>
+      <wsdl:output name="Get_x0020_just_x0020_movie_x0020_info_x002C__x0020_without_x0020_shows">
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
