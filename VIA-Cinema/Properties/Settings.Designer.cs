@@ -12,7 +12,7 @@ namespace VIA_Cinema.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.6.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.7.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -30,6 +30,16 @@ namespace VIA_Cinema.Properties {
         public string VIA_Cinema_localhost_VIACinemaService {
             get {
                 return ((string)(this["VIA_Cinema_localhost_VIACinemaService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://secure.ftipgw.com/ArgoFire/validate.asmx")]
+        public string VIA_Cinema_com_ftipgw_secure_CreditCardValidator {
+            get {
+                return ((string)(this["VIA_Cinema_com_ftipgw_secure_CreditCardValidator"]));
             }
         }
     }

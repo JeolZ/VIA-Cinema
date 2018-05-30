@@ -7,4 +7,6 @@
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="mainContent" runat="server">
     <asp:table runat="server" id="seats"></asp:table>
+    <asp:button runat="server" text="Confirm" onclick="ConfirmSeats" />
+    <asp:label runat="server" text="" id="formError"></asp:label>
 </asp:Content>
