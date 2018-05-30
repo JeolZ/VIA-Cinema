@@ -37,41 +37,109 @@ namespace VIA_Cinema
             summ += "<br />Total price: €" + totPrice + "<br /><br />";
 
             summarize.Text = summ;
+
+            if (Session["userId"] != null)
+            {
+                SqlConnection conn = new SqlConnection(
+                    ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
+                conn.Open();
+
+                SqlCommand cmd = conn.CreateCommand();
+
+                cmd.CommandText = @"SELECT CreditCardN FROM CreditCards WHERE UserId=@userId";
+                cmd.Parameters.Add("@userId", SqlDbType.Int);
+                cmd.Parameters["@userId"].Value = Convert.ToInt32(Session["userId"]);
+
+                ListItem li = new ListItem();
+                li.Value = "None";
+                li.Text = "None";
+                savedCards.Items.Add(li);
+
+                using (var rd = cmd.ExecuteReader(System.Data.CommandBehavior.SequentialAccess))
+                {
+                    while (rd.Read())
+                    {
+                        ListItem l = new ListItem();
+                        l.Value = rd["CreditCardN"].ToString();
+                        l.Text = "************"+l.Value.Substring(12);
+                        savedCards.Items.Add(l);
+                    }
+                }
+            }
+            else
+            {
+
+            }
+        }
+
+        protected void ToggleNewCreditCard(object sender, EventArgs e)
+        {
+            newCreditCard.Visible = false;
         }
 
         protected void CheckOrder(object sender, EventArgs e)
         {
+            //clear error
             formError.Text = "";
-            //check credit card
-            CreditCardValidator c = new CreditCardValidator();
-            int check = c.ValidCard(cardn.Text, exp.Text.Remove(2,1));
-            if (check!=0)
-            {
-                formError.Text = "Error " + check + "! Please check your Credit Card data.<br />";
-                return;
-            }
-
-
-            Regex code_valid = new Regex(@"^\d{3}$", RegexOptions.IgnoreCase);
-            if (!code_valid.Match(code.Text).Success)
-            {
-                formError.Text = "Please insert a valid 3-digits code.<br />";
-                return;
-            }
-
-            if (owner.Text.Equals(""))
-            {
-                formError.Text = "Please insert an owner.<br />";
-                return;
-            }
-
-            //insert into database
+            //database connection
             SqlConnection conn = new SqlConnection(
               ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
             conn.Open();
-
             SqlCommand cmd = conn.CreateCommand();
 
+            //If we selected a saved card
+            if (!savedCards.SelectedValue.Equals("None"))
+            {
+                //we don't need to check it
+                cardn.Text = savedCards.SelectedValue;
+            }
+            else
+            {
+                //check credit card
+                CreditCardValidator c = new CreditCardValidator();
+                int check = c.ValidCard(cardn.Text, exp.Text.Remove(2, 1));
+                if (check != 0)
+                {
+                    formError.Text = "Error " + check + "! Please check your Credit Card data.<br />";
+                    return;
+                }
+
+
+                Regex code_valid = new Regex(@"^\d{3}$", RegexOptions.IgnoreCase);
+                if (!code_valid.Match(code.Text).Success)
+                {
+                    formError.Text = "Please insert a valid 3-digits code.<br />";
+                    return;
+                }
+
+                if (owner.Text.Equals(""))
+                {
+                    formError.Text = "Please insert an owner.<br />";
+                    return;
+                }
+
+                if (saveCard.Checked && Session["userId"]!=null)
+                {
+                    SqlCommand comm = conn.CreateCommand();
+                    comm.CommandText = @"INSERT INTO CreditCards
+                                        (UserId, CreditCardN, ExpirationDate, Owner, SecCode)
+                                        VALUES(@userId, @card, @exp, @own, @code)";
+                    comm.Parameters.Add("@userId", SqlDbType.Int);
+                    comm.Parameters.Add("@card", SqlDbType.Char);
+                    comm.Parameters.Add("@exp", SqlDbType.Char);
+                    comm.Parameters.Add("@own", SqlDbType.VarChar);
+                    comm.Parameters.Add("@code", SqlDbType.Char);
+                    comm.Parameters["@userId"].Value = Session["userId"];
+                    comm.Parameters["@card"].Value = cardn.Text;
+                    comm.Parameters["@exp"].Value = exp.Text.Remove(2, 1);
+                    comm.Parameters["@own"].Value = owner.Text;
+                    comm.Parameters["@code"].Value = code.Text;
+
+                    comm.ExecuteNonQuery();
+                }
+            }
+
+            //insert into database
             string query = @"INSERT INTO Reservations (SeatN, ShowId, CreditCardN";
             if (Session["userId"] != null)
                 query += ", UserId";
@@ -98,6 +166,12 @@ namespace VIA_Cinema
                 cmd.Parameters["@seat"].Value = seat;
                 cmd.ExecuteNonQuery();
             }
+
+            Session["seats"] = null;
+            Session["showId"] = null;
+            Session["price"] = null;
+
+            Response.Redirect("ThankYou.aspx");
         }
     }
 }

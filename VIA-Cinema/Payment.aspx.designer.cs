@@ -31,6 +31,24 @@ namespace VIA_Cinema {
         protected global::System.Web.UI.WebControls.Label formError;
         
         /// <summary>
+        /// savedCards control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList savedCards;
+        
+        /// <summary>
+        /// newCreditCard control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl newCreditCard;
+        
+        /// <summary>
         /// cardn control.
         /// </summary>
         /// <remarks>
@@ -65,5 +83,14 @@ namespace VIA_Cinema {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox code;
+        
+        /// <summary>
+        /// saveCard control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox saveCard;
     }
 }
