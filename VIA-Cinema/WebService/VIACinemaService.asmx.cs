@@ -32,7 +32,7 @@ namespace VIA_Cinema.WebService
             return query(-1, day);
         }
 
-        [WebMethod(MessageName = "Get shows of \"day\" days from toda for the movie with MovieID = id")]
+        [WebMethod(MessageName = "Get shows of \"day\" days from today for the movie with MovieID = id")]
         public Movie[] GetShowsOfDay(int id, int day)
         {
             return query(id, day);

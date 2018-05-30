@@ -4,6 +4,6 @@
     <siteMapNode url="whats-on.aspx" title="What's On"  description="Next movies on the screen" />
     <siteMapNode url="about.aspx" title="About Us"  description="Learn something about us" />
     <siteMapNode url="contact-us.aspx" title="Contact Us"  description="How you can contact us" />
-    <siteMapNode url="" title="Log In" description="Log in with your account" />
+    <siteMapNode url="" title="My Account" description="Account" />
   </siteMapNode>
 </siteMap>
