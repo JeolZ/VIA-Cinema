@@ -11,10 +11,11 @@ namespace VIA_Cinema
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //destroy the session
             Session["UserID"] = null;
             Session["name"] = null;
             Session["Email"] = null;
-
+            //redirect to the main page
             Response.Redirect("../index.aspx");
         }
     }

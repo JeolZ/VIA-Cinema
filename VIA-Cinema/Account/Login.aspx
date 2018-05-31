@@ -9,21 +9,27 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="contentTop" runat="server">
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="mainContent" runat="server">
+
+    <!-- errors -->
     <div class="alert alert-danger" id="formError" runat="server">
     </div>
 
+    <!-- email -->
     <div class="form-group">
         <label for="email">Email address:</label>
         <input type="email" class="form-control" id="email" runat="server" placeholder="Enter your email">
     </div>
-
+    
+    <!-- password -->
     <div class="form-group">
         <label for="password">Password:</label>
         <input type="password" class="form-control" id="password" runat="server" placeholder="Enter your password">
     </div>
-
+    
+    <!-- login button -->
     <asp:button runat="server" text="Login" onclick="UserLogin" cssClass="btn btn-secondary" />
-
+    
+    <!-- registration link -->
     <p>
         Don't you have an account? <a href="Registration.aspx">Register here!</a>
     </p>

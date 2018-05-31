@@ -6,7 +6,6 @@
 <head runat="server">
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
-    <!--link rel="stylesheet" href="styles/style.css" /-->
      <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -24,10 +23,14 @@
         })
     </script>
     <form id="form1" runat="server">
+        <!--sitemap data source-->
         <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" />
+        <!--main container-->
         <div class="container-fluid">
             <div class="header">
+                <!--navbar-->
                 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+                    <!--"logo"-->
                     <a class="navbar-brand" href="#">VIA Cinema</a>
                     
                       <!-- Toggler/collapsibe Button -->
@@ -35,10 +38,12 @@
                         <span class="navbar-toggler-icon"></span>
                       </button>
 
+                    <!--menu-->
                     <div class="collapse navbar-collapse" id="collapsibleNavbar">
                         <asp:Menu ID="Menu1" DataSourceID="SiteMapDataSource1" StaticDisplayLevels="2" Orientation="Horizontal" CssClass="nav-menu ml-auto" runat="server"></asp:Menu>
                     </div>
                 </nav>
+                <!--header-->
                 <div class="jumbotron jumbotron-fluid">
                     <div class="container-fluid">
                         <asp:ContentPlaceHolder ID="headerContent" runat="server">
@@ -46,6 +51,7 @@
                     </div>
                 </div>
             </div> 
+            <!--main content-->
             <div id="content">
                 <h1>
                     <asp:ContentPlaceHolder ID="contentTop" runat="server">
@@ -56,6 +62,7 @@
                     </asp:ContentPlaceHolder>
                 </div>
             </div>
+            <!--footer-->
             <div class="jumbotron text-center" style="margin-bottom:0; margin-top:40px; font-size: 12px;">
                 <b>VIA-CINEMA</b><br /><br />
                 Project developed by <b>Roberto Stagi</b>, <b>Joël Zhu</b> and <b>Léo Masnada</b><br />

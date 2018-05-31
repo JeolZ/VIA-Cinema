@@ -15,22 +15,28 @@ namespace VIA_Cinema
             //Web service
             localhost.VIACinemaService via = new localhost.VIACinemaService();
             
+            //setting the days names
             d2.InnerText = System.DateTime.Now.AddDays(2).DayOfWeek.ToString().Substring(0, 3);
             d3.InnerText = System.DateTime.Now.AddDays(3).DayOfWeek.ToString().Substring(0, 3);
             d4.InnerText = System.DateTime.Now.AddDays(4).DayOfWeek.ToString().Substring(0, 3);
             d5.InnerText = System.DateTime.Now.AddDays(5).DayOfWeek.ToString().Substring(0, 3);
             d6.InnerText = System.DateTime.Now.AddDays(6).DayOfWeek.ToString().Substring(0, 3);
             
+            //save the cells to an indexed array
             HtmlGenericControl[] days = { day0, day1, day2, day3, day4, day5, day6 };
             for (int i = 0; i < 7; i++)
             {
+                //get all the movies for the current day (today+i)
                 localhost.Movie[] movies = via.GetMoviesOfDay(i);
 
+                //if there are no movies for today, show this message
                 if (movies.Length == 0)
                 {
                     days[i].InnerHtml = "<i>No films today.</i>";
                     continue;
                 }
+
+                //else, setup the div to show them
                 days[i].InnerHtml = "";
                 foreach (var m in movies)
                 {

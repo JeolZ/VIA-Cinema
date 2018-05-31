@@ -1,15 +1,19 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="whats-on.aspx.cs" Inherits="VIA_Cinema.whats_on" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>What's on</title>
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="headerContent" runat="server">
     <h1>What's on</h1>
     <h3><small>All the movies for this week.</small></h3>
 </asp:Content>
+
 <asp:Content ID="Content3" ContentPlaceHolderID="contentTop" runat="server">
     <h3>This week movies:</h3>
     <h4><small>To book, press the time you would like to go to the Cinema.</small></h4>
 </asp:Content>
+
 <asp:Content ID="Content4" ContentPlaceHolderID="mainContent" runat="server">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs">
@@ -47,6 +51,7 @@
       <div class="tab-pane container fade" runat="server" id="day6">...</div>
     </div>
 
+    <!-- script to enable tooltips on the shows times -->
     <script>
         $(document).ready(function(){
             $('[data-toggle="tooltip"]').tooltip(); 

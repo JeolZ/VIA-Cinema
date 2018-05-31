@@ -10,7 +10,7 @@ using System.Configuration;
 namespace VIA_Cinema.WebService
 {
     /// <summary>
-    /// Summary description for VIACinemaService
+    /// This WebService will send the data of the available movies
     /// </summary>
     [WebService(Namespace = "http://localhost/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
@@ -53,14 +53,16 @@ namespace VIA_Cinema.WebService
             return query(id, -1)[0];
         }
 
+        //the main method, called from every WebMethod
         private Movie[] query(int id, int days)
         {
+            //connect to the database
             SqlConnection conn = new SqlConnection(
                 ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
             conn.Open();
-
+            //create the command
             SqlCommand cmd = conn.CreateCommand();
-
+            //set up the query
             string query = @"SELECT M.MovieID AS MovieID,
                                     M.Title AS Title,
                                     M.Description AS Description,
@@ -68,41 +70,50 @@ namespace VIA_Cinema.WebService
                                     M.ReleaseDate AS ReleaseDate,
                                     M.Cover AS Cover";
 
-            if (id > 0 && days < 0)
+            if (id > 0 && days < 0) //if we want just the movie info
             {
+                //get the fields just from the table Movies
                 query += " FROM Movies AS M WHERE M.MovieId = " + id;
             }
             else
             {
+                //else, take all the shows info
                 query   +=  @", S.ShowId AS ShowID,
                                 S.Date AS Date,
                                 S.RoomId AS RoomId
                                 FROM Movies AS M, Shows AS S
                                 WHERE M.MovieID=S.MovieID";
-                if (days >= 0)
+                if (days >= 0) //if we are searching for a specific day, select the date we want
                     query += " AND CONVERT(date, S.Date) = CONVERT(date, GETDATE( )+"+days+")";
-                else
+                else //else, just take all future movies
                     query += " AND S.Date >= GETDATE( )";
 
+                //if we passed an id, take just the shows of the movie we want
                 if (id > 0)
                     query += " AND M.MovieId = " + id;
                 
+                //ordering
                 query += " ORDER BY M.MovieId, S.Date, S.ShowId ASC";
             }
 
+            //save the query
             cmd.CommandText = query;
 
+            //read the results
             List<Movie> t = new List<Movie>();
             using (var rd = cmd.ExecuteReader(CommandBehavior.SequentialAccess))
             {
                 if (rd.Read())
                 {
                     bool more = true;
+                    //get curId
                     int curId = Int32.Parse(rd["MovieID"].ToString());
-                    while (more)
+                    while (more) //until we can read (more is updated below)
                     {
+                        //save the current Id, we'll need it later
                         int preId = curId;
 
+                        //create the Movie object
                         Movie m = new Movie(curId,
                                             rd["Title"].ToString(),
                                             rd["Description"].ToString(),
@@ -111,30 +122,35 @@ namespace VIA_Cinema.WebService
                                             rd["Cover"].ToString(),
                                             null);
 
+                        //if we want the shows
                         if (id <= 0 || days >= 0)
                         {
+                            //read until the curId is the same (now we need preId)
                             List<Show> shows = new List<Show>();
                             do
                             {
+                                //read show data
                                 int showId = Int32.Parse(rd["ShowID"].ToString());
                                 DateTime date = DateTime.ParseExact(rd["Date"].ToString(), "dd/MM/yyyy HH:mm:ss",
                                     System.Globalization.CultureInfo.InvariantCulture);
+                                //add to the list the Show Object
                                 shows.Add(new Show(showId,
                                                     date,
                                                     Int32.Parse(rd["RoomId"].ToString()),
                                                     -1
                                                   ));
                             } while ((more = rd.Read()) && (curId = Int32.Parse(rd["MovieID"].ToString())) == preId);
-
+                            //save the show list to the movie object
                             m.Shows = shows.ToArray();
                         }
                         else if(more = rd.Read())
                                 curId = Int32.Parse(rd["MovieID"].ToString());
-                        t.Add(m);
+                        t.Add(m); //add the movie object to the list
                     }
                 }
             }
 
+            //return the array of movies
             return t.ToArray();
 
         }

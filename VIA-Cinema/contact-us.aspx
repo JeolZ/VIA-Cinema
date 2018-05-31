@@ -2,12 +2,15 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>Contact us</title>
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="headerContent" runat="server">
     <h1>Contact Us</h1>
     <h3><small>Everything you need to get in touch with us</small></h3>
 </asp:Content>
+
 <asp:Content ID="Content3" ContentPlaceHolderID="contentTop" runat="server">
 </asp:Content>
+
 <asp:Content ID="Content4" ContentPlaceHolderID="mainContent" runat="server">
     <div class="row">
         <div class="col-md-4 col-sm-12">

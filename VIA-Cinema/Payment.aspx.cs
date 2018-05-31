@@ -14,28 +14,37 @@ namespace VIA_Cinema
 {
     public partial class Payment : System.Web.UI.Page
     {
+        //global attributes
         private List<string> seats;
         private string showId;
         private float totPrice;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //hide the error div
             formError.Visible = false;
+
+            //if it's not logged in, hide the dropdown list and the checkbox
             if (Session["userId"] == null)
             {
                 saveCardWrapper.Visible = false;
                 savedCardsWrapper.Visible = false;
             }
 
+            //take the seats chosen and the showId
             seats = (List<string>)Session["seats"];
             showId = (string)Session["showId"];
 
+            //if something is null (we arrived here without passing through the booking page)
+            //redirect to the main page
             if(seats==null || showId == null || Session["price"]==null)
                 Response.Redirect("index.aspx");
 
+            //save the tot price
             totPrice = (float)Session["price"];
             totPrice *= seats.Count;
 
+            //setting the summary of the purchase
             string summ = "<p><b>Movie:</b> " + Session["title"] + "<br />";
             summ += "<b>Room:</b> " + Session["room"] + "<br />";
             summ += "<b>Date and Time:</b> " + Session["date"] + "<br />";
@@ -47,46 +56,51 @@ namespace VIA_Cinema
 
             summary.Text = summ;
 
+            //if it's logged in
             if (Session["userId"] != null)
             {
+                //connect to the db
                 SqlConnection conn = new SqlConnection(
                     ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
                 conn.Open();
-
+                //create the command variable
                 SqlCommand cmd = conn.CreateCommand();
 
+                //set the query to retrieve all saved credit cards
                 cmd.CommandText = @"SELECT CreditCardN, ExpirationDate FROM CreditCards WHERE UserId=@userId";
+                //set the parameters
                 cmd.Parameters.Add("@userId", SqlDbType.Int);
                 cmd.Parameters["@userId"].Value = Convert.ToInt32(Session["userId"]);
 
+                //put the first item into the drop down list
                 ListItem li = new ListItem();
                 li.Value = "None";
                 li.Text = "None";
                 savedCards.Items.Add(li);
-
+                
+                //read the results
                 using (var rd = cmd.ExecuteReader(System.Data.CommandBehavior.SequentialAccess))
                 {
                     while (rd.Read())
                     {
+                        //take the credit card number and the expiration date
                         string cardN = rd["CreditCardN"].ToString();
                         string expDate = rd["ExpirationDate"].ToString();
-
+                        //check if they're still valid
                         CreditCardValidator c = new CreditCardValidator();
                         int check = c.ValidCard(cardN, expDate);
 
+                        //if they are not, skip it
                         if (check != 0)
                             continue;
 
+                        //else, put the card inside the drop down list
                         ListItem l = new ListItem();
                         l.Value = cardN;
                         l.Text = "************"+l.Value.Substring(12);
                         savedCards.Items.Add(l);
                     }
                 }
-            }
-            else
-            {
-
             }
         }
 
@@ -104,7 +118,7 @@ namespace VIA_Cinema
             //If we selected a saved card
             if (Session["userId"]!=null & !savedCards.SelectedValue.Equals("None"))
             {
-                //we don't need to check it
+                //we don't need to check it (we did when we retrieved it from the db)
                 cardn.Value = savedCards.SelectedValue;
             }
             else
@@ -112,17 +126,22 @@ namespace VIA_Cinema
                 //check credit card
                 CreditCardValidator c = new CreditCardValidator();
                 string expDate = "";
+                //if the field has been set
                 if (exp.Value.Length>6)
+                    //convert it into the form mmyy
                     expDate = exp.Value.Substring(5) + exp.Value.Substring(2, 2);
+
+                //check the credit card validity
                 int check = c.ValidCard(cardn.Value, expDate);
                 if (check != 0)
                 {
+                    //if it's not valid, show an error
                     formError.InnerHtml = "<p>Error " + check + "! Please check your Credit Card data.</p>";
                     formError.Visible = true;
                     return;
                 }
 
-
+                //regex for the CVV code (3 digits)
                 Regex code_valid = new Regex(@"^\d{3}$", RegexOptions.IgnoreCase);
                 if (!code_valid.Match(code.Value).Success)
                 {
@@ -131,6 +150,7 @@ namespace VIA_Cinema
                     return;
                 }
 
+                //if it has not been inserted an owner name, show an error
                 if (owner.Value.Equals(""))
                 {
                     formError.InnerHtml = "Please insert an owner.<br />";
@@ -138,12 +158,16 @@ namespace VIA_Cinema
                     return;
                 }
 
+                //if the user wants to save the card
                 if (saveCard.Checked && Session["userId"]!=null)
                 {
+                    //create the command
                     SqlCommand comm = conn.CreateCommand();
+                    //set the query
                     comm.CommandText = @"INSERT INTO CreditCards
                                         (UserId, CreditCardN, ExpirationDate, Owner, SecCode)
                                         VALUES(@userId, @card, @exp, @own, @code)";
+                    //set the parameters
                     comm.Parameters.Add("@userId", SqlDbType.Int);
                     comm.Parameters.Add("@card", SqlDbType.Char);
                     comm.Parameters.Add("@exp", SqlDbType.Char);
@@ -154,12 +178,12 @@ namespace VIA_Cinema
                     comm.Parameters["@exp"].Value = expDate;
                     comm.Parameters["@own"].Value = owner.Value;
                     comm.Parameters["@code"].Value = code.Value;
-
+                    //execute the query to insert the credit card
                     comm.ExecuteNonQuery();
                 }
             }
 
-            //insert into database
+            //insert into database the reservation (connected to the userId, if it's logged in)
             string query = @"INSERT INTO Reservations (SeatN, ShowId, CreditCardN";
             if (Session["userId"] != null)
                 query += ", UserId";
@@ -168,29 +192,35 @@ namespace VIA_Cinema
                 query += ", @userId";
             query += ");";
 
+            //set the query and the parameters
             cmd.CommandText = query;
             cmd.Parameters.Add("@seat", SqlDbType.VarChar);
             cmd.Parameters.Add("@showId", SqlDbType.Int);
             cmd.Parameters.Add("@card", SqlDbType.Char);
             cmd.Parameters["@showId"].Value = showId;
             cmd.Parameters["@card"].Value = cardn.Value;
-
             if (Session["userId"] != null)
             {
                 cmd.Parameters.Add("@userId", SqlDbType.Int);
                 cmd.Parameters["@userId"].Value = (int)Session["userId"];
             }
 
+            //execute the queries changing the seat number
             foreach(var seat in seats)
             {
                 cmd.Parameters["@seat"].Value = seat;
                 cmd.ExecuteNonQuery();
             }
 
+            //reset the session variables
             Session["seats"] = null;
             Session["showId"] = null;
             Session["price"] = null;
+            Session["title"] = null;
+            Session["room"] = null;
+            Session["date"] = null;
 
+            //redirect to the ThankYou page
             Response.Redirect("ThankYou.aspx");
         }
     }
