@@ -35,6 +35,7 @@
         </div>
         <div class="col-4">
             <h3>Shows:</h3>
+            <h4><small>To book, press the time you would like to go to the Cinema.</small></h4>
             <table class="table table-hover">
                 <tbody>
                   <tr>

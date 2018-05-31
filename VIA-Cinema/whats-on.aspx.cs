@@ -42,7 +42,7 @@ namespace VIA_Cinema
                     days[i].InnerHtml += "<div class=\"card-body\">";
                     days[i].InnerHtml += "<a href=\"Movie.aspx?movieId=" + m.Id + "\">";
                     days[i].InnerHtml += "<h4 class=\"card-title\">" + m.Title + "</h4></a>";
-                    days[i].InnerHtml += "<p class=\"card-text\">" + m.Description + "</p>";
+                    days[i].InnerHtml += "<p class=\"card-text\">" + m.Description.Substring(0, 250) + "...</p>";
                     days[i].InnerHtml += "<p>" + m.Duration + "mins</p>";
                     foreach (var s in m.Shows)
                         days[i].InnerHtml += "<a data-toggle=\"tooltip\" class=\"btn btn-primary\" href=\"ChooseSeats.aspx?showId=" + s.Id

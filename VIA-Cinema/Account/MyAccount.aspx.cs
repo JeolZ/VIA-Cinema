@@ -59,7 +59,7 @@ namespace VIA_Cinema.Account
                     bookingsList.Rows.Add(new HtmlTableRow());
 
                     HtmlTableCell cell = new HtmlTableCell();
-                    cell.InnerHtml = seats + "seats reserved for <b>" + title + "</b> on " + date + " in Room " + room + ".";
+                    cell.InnerHtml = seats + " seats reserved for <b>" + title + "</b> on " + date + " in Room " + room + ".";
                     bookingsList.Rows[i].Cells.Add(cell);
                     cell = new HtmlTableCell();
                     cell.InnerHtml = "<a class=\"btn btn-primary\" href=\"DeleteBooking.aspx?showId=" + showId + "\">Delete</a>";
@@ -67,7 +67,7 @@ namespace VIA_Cinema.Account
                     i++;
                 }
                 if (i == 0)
-                    bookingsList.InnerHtml = "<i>No bookings found</i>";
+                    bookingsListWrapper.InnerHtml = "<i>No bookings found</i>";
             }
             conn.Close();
         }

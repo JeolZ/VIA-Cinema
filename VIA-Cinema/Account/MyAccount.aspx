@@ -13,11 +13,13 @@
         <a href="LogOut.aspx" class="btn btn-primary">Log out</a>
     </div>
 
-    <h4 data-toggle="collapse" data-target="#mainContent_bookingsList" style="cursor: pointer" title="click to show">Your active bookings:</h4>
-    <table id="bookingsList" class="table table-hover collapse" runat="server">
+    <h4 data-toggle="collapse" data-target="#mainContent_bookingsListWrapper" style="cursor: pointer" title="click to show">Your active bookings:</h4>
+    <div id="bookingsListWrapper" runat="server" class="collapse">
+    <table id="bookingsList" class="table table-hover" runat="server">
         <tbody>
         </tbody>
     </table>
+    </div>
     <br /><br />
     
     <h4 data-toggle="collapse" data-target="#dataChange" style="cursor: pointer" title="click to show">Your data:</h4>

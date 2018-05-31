@@ -16,4 +16,10 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="mainContent" runat="server">
     Welcome to the <b>VIA Cinema</b>, a web portal to check all the movies on the screen, as well as booking a seat.<br />
     Have a look at our movies this week checking the <b>What's On</b> page.
+    <br /><br />
+    <b>Click on "My Account" to log in.</b><br /><br />
+
+    <h5>Test user:</h5>
+    <h6>test@test.com</h6>
+    <h6>test1234</h6>
 </asp:Content>

@@ -8,6 +8,7 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="contentTop" runat="server">
     <h3>This week movies:</h3>
+    <h4><small>To book, press the time you would like to go to the Cinema.</small></h4>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="mainContent" runat="server">
     <!-- Nav tabs -->

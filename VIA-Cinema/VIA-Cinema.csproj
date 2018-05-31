@@ -75,8 +75,6 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\MyAccount.aspx" />
     <Content Include="Account\Registration.aspx" />
-    <Content Include="Administration\AddMovie.aspx" />
-    <Content Include="Administration\ListMovies.aspx" />
     <Content Include="App_Data\Via-Cinema_Database.mdf" />
     <Content Include="App_Data\Via-Cinema_Database_log.ldf">
       <DependentUpon>Via-Cinema_Database.mdf</DependentUpon>
@@ -165,20 +163,6 @@
     </Compile>
     <Compile Include="Account\Registration.aspx.designer.cs">
       <DependentUpon>Registration.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Administration\AddMovie.aspx.cs">
-      <DependentUpon>AddMovie.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Administration\AddMovie.aspx.designer.cs">
-      <DependentUpon>AddMovie.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Administration\ListMovies.aspx.cs">
-      <DependentUpon>ListMovies.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Administration\ListMovies.aspx.designer.cs">
-      <DependentUpon>ListMovies.aspx</DependentUpon>
     </Compile>
     <Compile Include="ChooseSeats.aspx.cs">
       <DependentUpon>ChooseSeats.aspx</DependentUpon>
