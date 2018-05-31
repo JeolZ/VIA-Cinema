@@ -6,8 +6,9 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="contentTop" runat="server">
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="mainContent" runat="server">
-    <asp:label id="formError" runat="server" text=""></asp:label>
-
+    <div class="alert alert-danger">
+        <asp:label id="formError" runat="server" text=""></asp:label>
+    </div>
     <div class="formField">
         <div class="label"><asp:label runat="server" text="Email"></asp:label></div>
         <div class="field"><asp:textbox id="email" runat="server"></asp:textbox></div>

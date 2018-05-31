@@ -23,7 +23,7 @@ namespace VIA_Cinema.localhost {
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="VIACinemaServiceSoap", Namespace="http://localhost/")]
@@ -146,14 +146,14 @@ namespace VIA_Cinema.localhost {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://localhost/Get shows of \"day\" days from toda for the movie with MovieID = i" +
-            "d", RequestElementName="Get shows of \"day\" days from toda for the movie with MovieID = id", RequestNamespace="http://localhost/", ResponseElementName="Get shows of \"day\" days from toda for the movie with MovieID = idResponse", ResponseNamespace="http://localhost/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlArrayAttribute("Get shows of \"day\" days from toda for the movie with MovieID = idResult")]
-        public Movie[] GetShowsOfDay(int id, int day) {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://localhost/Get shows of \"day\" days from today for the movie with MovieID = " +
+            "id", RequestElementName="Get shows of \"day\" days from today for the movie with MovieID = id", RequestNamespace="http://localhost/", ResponseElementName="Get shows of \"day\" days from today for the movie with MovieID = idResponse", ResponseNamespace="http://localhost/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlArrayAttribute("Get shows of \"day\" days from today for the movie with MovieID = idResult")]
+        public Show[] GetShowsOfDay(int id, int day) {
             object[] results = this.Invoke("GetShowsOfDay", new object[] {
                         id,
                         day});
-            return ((Movie[])(results[0]));
+            return ((Show[])(results[0]));
         }
         
         /// <remarks/>
@@ -228,7 +228,7 @@ namespace VIA_Cinema.localhost {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -309,7 +309,7 @@ namespace VIA_Cinema.localhost {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -366,11 +366,11 @@ namespace VIA_Cinema.localhost {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void GetAllMoviesCompletedEventHandler(object sender, GetAllMoviesCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GetAllMoviesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -392,11 +392,11 @@ namespace VIA_Cinema.localhost {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void GetMoviesOfDayCompletedEventHandler(object sender, GetMoviesOfDayCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GetMoviesOfDayCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -418,11 +418,11 @@ namespace VIA_Cinema.localhost {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void GetShowsOfDayCompletedEventHandler(object sender, GetShowsOfDayCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GetShowsOfDayCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -435,20 +435,20 @@ namespace VIA_Cinema.localhost {
         }
         
         /// <remarks/>
-        public Movie[] Result {
+        public Show[] Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((Movie[])(this.results[0]));
+                return ((Show[])(this.results[0]));
             }
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void GetMovieInfoCompletedEventHandler(object sender, GetMovieInfoCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GetMovieInfoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {

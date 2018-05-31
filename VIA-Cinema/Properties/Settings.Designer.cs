@@ -26,20 +26,20 @@ namespace VIA_Cinema.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:52492/WebService/VIACinemaService.asmx")]
-        public string VIA_Cinema_localhost_VIACinemaService {
+        [global::System.Configuration.DefaultSettingValueAttribute("https://secure.ftipgw.com/ArgoFire/validate.asmx")]
+        public string VIA_Cinema_com_ftipgw_secure_CreditCardValidator {
             get {
-                return ((string)(this["VIA_Cinema_localhost_VIACinemaService"]));
+                return ((string)(this["VIA_Cinema_com_ftipgw_secure_CreditCardValidator"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://secure.ftipgw.com/ArgoFire/validate.asmx")]
-        public string VIA_Cinema_com_ftipgw_secure_CreditCardValidator {
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:52492/WebService/VIACinemaService.asmx")]
+        public string VIA_Cinema_localhost_VIACinemaService {
             get {
-                return ((string)(this["VIA_Cinema_com_ftipgw_secure_CreditCardValidator"]));
+                return ((string)(this["VIA_Cinema_localhost_VIACinemaService"]));
             }
         }
     }

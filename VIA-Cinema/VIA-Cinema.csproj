@@ -71,8 +71,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="about.aspx" />
+    <Content Include="Account\DeleteBooking.aspx" />
     <Content Include="Account\Login.aspx" />
+    <Content Include="Account\MyAccount.aspx" />
     <Content Include="Account\Registration.aspx" />
+    <Content Include="Administration\AddMovie.aspx" />
+    <Content Include="Administration\ListMovies.aspx" />
     <Content Include="App_Data\Via-Cinema_Database.mdf" />
     <Content Include="App_Data\Via-Cinema_Database_log.ldf">
       <DependentUpon>Via-Cinema_Database.mdf</DependentUpon>
@@ -80,20 +84,15 @@
     <Content Include="ChooseSeats.aspx" />
     <Content Include="contact-us.aspx" />
     <Content Include="index.aspx" />
+    <Content Include="Account\LogOut.aspx" />
     <Content Include="MasterPage.Master" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="Movie.aspx" />
     <Content Include="Payment.aspx" />
     <Content Include="ThankYou.aspx" />
-    <Content Include="Web References\localhost\Movie.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </Content>
-    <Content Include="Web References\localhost\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
     <Content Include="Web References\com.ftipgw.secure\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -102,6 +101,16 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Web References\com.ftipgw.secure\validate.wsdl" />
+    <Content Include="Web References\localhost\Movie.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\localhost\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <Content Include="Web References\localhost\Show.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
     <None Include="Web References\localhost\VIACinemaService.disco" />
     <Content Include="WebService\VIACinemaService.asmx" />
     <Content Include="whats-on.aspx" />
@@ -129,6 +138,13 @@
     <Compile Include="about.aspx.designer.cs">
       <DependentUpon>about.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Account\DeleteBooking.aspx.cs">
+      <DependentUpon>DeleteBooking.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\DeleteBooking.aspx.designer.cs">
+      <DependentUpon>DeleteBooking.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Account\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -136,12 +152,33 @@
     <Compile Include="Account\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Account\MyAccount.aspx.cs">
+      <DependentUpon>MyAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\MyAccount.aspx.designer.cs">
+      <DependentUpon>MyAccount.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Account\Registration.aspx.cs">
       <DependentUpon>Registration.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Account\Registration.aspx.designer.cs">
       <DependentUpon>Registration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\AddMovie.aspx.cs">
+      <DependentUpon>AddMovie.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\AddMovie.aspx.designer.cs">
+      <DependentUpon>AddMovie.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\ListMovies.aspx.cs">
+      <DependentUpon>ListMovies.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\ListMovies.aspx.designer.cs">
+      <DependentUpon>ListMovies.aspx</DependentUpon>
     </Compile>
     <Compile Include="ChooseSeats.aspx.cs">
       <DependentUpon>ChooseSeats.aspx</DependentUpon>
@@ -164,12 +201,26 @@
     <Compile Include="index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Account\LogOut.aspx.cs">
+      <DependentUpon>LogOut.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\LogOut.aspx.designer.cs">
+      <DependentUpon>LogOut.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MasterPage.Master.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="MasterPage.Master.designer.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Movie.aspx.cs">
+      <DependentUpon>Movie.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Movie.aspx.designer.cs">
+      <DependentUpon>Movie.aspx</DependentUpon>
     </Compile>
     <Compile Include="Payment.aspx.cs">
       <DependentUpon>Payment.aspx</DependentUpon>
@@ -215,9 +266,7 @@
       <DependentUpon>whats-on.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Administration\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>

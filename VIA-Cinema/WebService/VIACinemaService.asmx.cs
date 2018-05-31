@@ -33,9 +33,15 @@ namespace VIA_Cinema.WebService
         }
 
         [WebMethod(MessageName = "Get shows of \"day\" days from today for the movie with MovieID = id")]
-        public Movie[] GetShowsOfDay(int id, int day)
+        public Show[] GetShowsOfDay(int id, int day)
         {
-            return query(id, day);
+            if (id <= 0)
+                return null;
+
+            Movie[] m = query(id, day);
+            if(m.Length > 0)
+                return m[0].Shows;
+            return null;
         }
 
         [WebMethod(MessageName = "Get just movie info, without shows")]
@@ -103,21 +109,25 @@ namespace VIA_Cinema.WebService
                                             rd["ReleaseDate"].ToString(),
                                             null);
 
-                        List<Show> shows = new List<Show>();
-                        do
+                        if (id <= 0 || days >= 0)
                         {
-                            int showId = Int32.Parse(rd["ShowID"].ToString());
-                            DateTime date = DateTime.ParseExact(rd["Date"].ToString(), "dd/MM/yyyy HH:mm:ss",
-                                System.Globalization.CultureInfo.InvariantCulture);
-                            shows.Add(new Show( showId,
-                                                date,
-                                                Int32.Parse(rd["RoomId"].ToString()),
-                                                -1
-                                              ));
-                        } while ((more = rd.Read()) && (curId = Int32.Parse(rd["MovieID"].ToString())) == preId);
+                            List<Show> shows = new List<Show>();
+                            do
+                            {
+                                int showId = Int32.Parse(rd["ShowID"].ToString());
+                                DateTime date = DateTime.ParseExact(rd["Date"].ToString(), "dd/MM/yyyy HH:mm:ss",
+                                    System.Globalization.CultureInfo.InvariantCulture);
+                                shows.Add(new Show(showId,
+                                                    date,
+                                                    Int32.Parse(rd["RoomId"].ToString()),
+                                                    -1
+                                                  ));
+                            } while ((more = rd.Read()) && (curId = Int32.Parse(rd["MovieID"].ToString())) == preId);
 
-                        m.Shows = shows.ToArray();
-
+                            m.Shows = shows.ToArray();
+                        }
+                        else if(more = rd.Read())
+                                curId = Int32.Parse(rd["MovieID"].ToString());
                         t.Add(m);
                     }
                 }

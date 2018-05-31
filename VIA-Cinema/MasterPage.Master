@@ -6,45 +6,64 @@
 <head runat="server">
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
-    <link rel="stylesheet" href="styles/style.css" />
+    <!--link rel="stylesheet" href="styles/style.css" /-->
+     <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 </head>
 <body>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $("div.nav-menu > ul").removeClass("level1").removeClass("static").addClass("navbar-nav");
+            $("div.nav-menu > ul > li").removeClass("static").addClass("nav-item");
+            $("div.nav-menu > ul > li > a").removeClass("level2").removeClass("static").removeClass("level1").addClass("nav-link");
+        })
+    </script>
     <form id="form1" runat="server">
         <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" />
-        <div id="container">
-            <header id="header">
-                <div id="headerTop">
-                    <div id="logo">
-                        LOGO
+        <div class="container-fluid">
+            <div class="header">
+                <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+                    <a class="navbar-brand" href="#">VIA Cinema</a>
+                    
+                      <!-- Toggler/collapsibe Button -->
+                      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                        <span class="navbar-toggler-icon"></span>
+                      </button>
+
+                    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                        <asp:Menu ID="Menu1" DataSourceID="SiteMapDataSource1" StaticDisplayLevels="2" Orientation="Horizontal" CssClass="nav-menu ml-auto" runat="server"></asp:Menu>
                     </div>
-                    <nav id="menu">
-                        <img src="images/hamburger-icon.svg" id="hamburger" />
-                        <asp:Menu ID="Menu1" DataSourceID="SiteMapDataSource1" StaticDisplayLevels="2" Orientation="Horizontal" CssClass="topMenu" runat="server"></asp:Menu>
-                    </nav>
+                </nav>
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container-fluid">
+                        <asp:ContentPlaceHolder ID="headerContent" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
                 </div>
-                <div id="headerBottom">
-                    <asp:ContentPlaceHolder ID="headerContent" runat="server">
-                    </asp:ContentPlaceHolder>
-                </div>
-            </header>
-            <hr />            
+            </div> 
             <div id="content">
-                <div class="contentTop">
+                <h1>
                     <asp:ContentPlaceHolder ID="contentTop" runat="server">
                     </asp:ContentPlaceHolder>
-                </div>
-                <div class="mainContent">
+                </h1>
+                <p>
                     <asp:ContentPlaceHolder ID="mainContent" runat="server">
                     </asp:ContentPlaceHolder>
-                </div>
+                </p>
             </div>
-            <hr />
-            <footer id="footer">
+            <div class="jumbotron text-center" style="margin-bottom:0">
                 Bottom links <br />
                 Copyright, developer and stuff <br />
                 IT IS ALWAYS THE SAME
-            </footer>
+            </div>
         </div>
     </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 </body>
 </html>
