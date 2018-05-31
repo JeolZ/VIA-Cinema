@@ -14,18 +14,20 @@ namespace VIA_Cinema.WebService
         public int Duration { get; set; }
         public string ReleaseDate { get; set; }
         public Show[] Shows { get; set; }
+        public string Cover { get; set; }
 
         public Movie()
         {
         }
 
-        public Movie(int id, string t, string d, int dur, string rd, Show[] s)
+        public Movie(int id, string t, string d, int dur, string rd, string c, Show[] s)
         {
             Id = id;
             Title = t;
             Description = d;
             Duration = dur;
             ReleaseDate = rd;
+            Cover = c;
             Shows = s;
         }
     }

@@ -2,8 +2,62 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="headerContent" runat="server">
+    <h1>Your Account</h1>
+    <h3><small>Here you can edit all your active bookings and your personal data</small></h3>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="contentTop" runat="server">
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="mainContent" runat="server">
+    <div style="text-align: center; font-size: 20px;">
+        <h3><asp:Label ID="hi" runat="server" Text=""></asp:Label></h3>
+        <a href="LogOut.aspx" class="btn btn-primary">Log out</a>
+    </div>
+
+    <h4 data-toggle="collapse" data-target="#mainContent_bookingsList" style="cursor: pointer" title="click to show">Your active bookings:</h4>
+    <table id="bookingsList" class="table table-hover collapse" runat="server">
+        <tbody>
+        </tbody>
+    </table>
+    <br /><br />
+    
+    <h4 data-toggle="collapse" data-target="#dataChange" style="cursor: pointer" title="click to show">Your data:</h4>
+    <div class="alert alert-danger" id="formError1" runat="server">
+    </div>
+    <div id="dataChange" class="collapse">
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input disabled type="text" class="form-control" id="email" runat="server">
+    </div>
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="name" runat="server">
+    </div>
+    <div class="form-group">
+        <label for="surname">Surname:</label>
+        <input type="text" class="form-control" id="surname" runat="server">
+    </div>
+
+    <asp:Button ID="Button2" onclick="EditData" runat="server" Text="Edit Data" CssClass="btn btn-secondary" />
+    </div>
+    <br /><br />
+
+    <h4 data-toggle="collapse" data-target="#passwordReset" style="cursor: pointer" title="click to show">Reset password:</h4>
+    <div class="alert alert-danger" id="formError2" runat="server">
+    </div>
+    <div id="passwordReset" class="collapse">
+        <div class="form-group">
+            <label for="pswOld">Old Password:</label>
+            <input type="password" class="form-control" id="pswOld" runat="server" placeholder="Enter your Old password">
+        </div>
+        <div class="form-group">
+            <label for="password">New Password:</label>
+            <input type="password" class="form-control" id="password" runat="server" placeholder="Enter your New password">
+        </div>
+        <div class="form-group">
+            <label for="password2">Confirm Password:</label>
+            <input type="password" class="form-control" id="password2" runat="server" placeholder="Enter again your new password">
+        </div>
+
+        <asp:Button ID="Button1" onclick="ResetPassword" runat="server" Text="Reset" CssClass="btn btn-secondary" />
+    </div>
 </asp:Content>

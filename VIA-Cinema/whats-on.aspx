@@ -4,9 +4,10 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="headerContent" runat="server">
     <h1>What's on</h1>
+    <h3><small>All the movies for this week.</small></h3>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="contentTop" runat="server">
-    <h3>This week movies</h3>
+    <h3>This week movies:</h3>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="mainContent" runat="server">
     <!-- Nav tabs -->

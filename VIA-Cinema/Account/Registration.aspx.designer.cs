@@ -19,7 +19,7 @@ namespace VIA_Cinema.Account {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label formError;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl formError;
         
         /// <summary>
         /// name control.
@@ -28,7 +28,7 @@ namespace VIA_Cinema.Account {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox name;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText name;
         
         /// <summary>
         /// surname control.
@@ -37,7 +37,7 @@ namespace VIA_Cinema.Account {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox surname;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText surname;
         
         /// <summary>
         /// email control.
@@ -46,7 +46,7 @@ namespace VIA_Cinema.Account {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox email;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl email;
         
         /// <summary>
         /// password control.
@@ -55,7 +55,7 @@ namespace VIA_Cinema.Account {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox password;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword password;
         
         /// <summary>
         /// password2 control.
@@ -64,6 +64,6 @@ namespace VIA_Cinema.Account {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox password2;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword password2;
     }
 }

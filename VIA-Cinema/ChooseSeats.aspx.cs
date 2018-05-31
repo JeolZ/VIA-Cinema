@@ -16,11 +16,15 @@ namespace VIA_Cinema
 
         List<CheckBox> seatsCheck = new List<CheckBox>();
         float price;
+        string title, date;
+        int room;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.QueryString["showId"] == null)
                 Response.Redirect("index.aspx");
+
+            formError.Visible = false;
 
             int showId = Convert.ToInt32(Request.QueryString["showId"]), maxX = 0, maxY = 0;
 
@@ -32,11 +36,15 @@ namespace VIA_Cinema
 
             cmd.CommandText = @"SELECT  MAX(Se.LocationY) AS maxY,
                                         MAX(Se.LocationX) AS maxX,
-                                        S.Price AS Price
-                                FROM Shows AS S, Seats AS Se
+                                        S.Price AS Price,
+                                        M.Title AS Title,
+                                        S.RoomId AS Room,
+                                        S.Date AS Date
+                                FROM Shows AS S, Seats AS Se, Movies AS M
                                 WHERE S.ShowId=@showId
                                     AND S.RoomId = Se.RoomId
-                                GROUP BY Se.RoomId, S.Price";
+                                    AND S.MovieId = M.MovieId
+                                GROUP BY Se.RoomId, S.Price, M.Title, S.RoomId, S.Date";
             cmd.Parameters.Add("@showId", SqlDbType.Int);
             cmd.Parameters["@showId"].Value = showId;
 
@@ -47,8 +55,15 @@ namespace VIA_Cinema
                     maxY = Convert.ToInt32(rd["maxY"]);
                     maxX = Convert.ToInt32(rd["maxX"]);
                     price = float.Parse(rd["Price"].ToString());
+                    title = rd["Title"].ToString();
+                    room = Convert.ToInt32(rd["Room"].ToString());
+                    date = rd["Date"].ToString().Substring(0, 16);
                 }
             }
+
+            info.Text = "<h1>" + title + "</h1>";
+            info.Text += "<p><b>Room:</b> " + room + "<br />";
+            info.Text += "<b>Date and Time:</b> " + date + "</p>";
 
             for (int i = 0; i <= maxY; i++)
             {
@@ -93,18 +108,12 @@ namespace VIA_Cinema
                         continue;
 
                     CheckBox cb = new CheckBox() { ID = id };
-
                     seats.Rows[i].Cells[j].Controls.Add(cb);
                     seats.Rows[i].Cells[j].CssClass = "AvailableSeat";
                     seatsCheck.Add(cb);
                 }
             }
         }
-
-
-        /*protected void Page_Load(object sender, EventArgs e)
-        {
-        }*/
 
 
         protected void ConfirmSeats(object sender, EventArgs e)
@@ -118,13 +127,17 @@ namespace VIA_Cinema
 
             if (chosenSeats.Count == 0)
             {
-                formError.Text = "Please choose at least one seat to continue.<br />";
+                formError.InnerHtml = "<p>Please choose at least one seat to continue.</p>";
+                formError.Visible = true;
                 return;
             }
 
             Session["showId"] = Request.QueryString["showId"];
             Session["seats"] = chosenSeats;
             Session["price"] = price;
+            Session["title"] = title;
+            Session["room"] = room;
+            Session["date"] = date;
             Response.Redirect("Payment.aspx");
         }
 

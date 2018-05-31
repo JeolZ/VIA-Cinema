@@ -16,7 +16,7 @@ namespace VIA_Cinema.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            formError.Visible = false;
         }
 
         protected void UserRegistration(object sender, EventArgs e)
@@ -32,20 +32,20 @@ namespace VIA_Cinema.Account
             String err = "";
             Regex name_valid = new Regex(@"^[a-zA-Z\s]*$");
 
-            if (!name_valid.Match(name.Text).Success)
+            if (!name_valid.Match(name.Value).Success)
                 err += "Insert a valid name.<br />";
 
-            if (!name_valid.Match(surname.Text).Success)
+            if (!name_valid.Match(surname.Value).Success)
                 err += "Insert a valid surname.<br />";
 
             Regex email_valid = new Regex(@"\b[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}\b$", RegexOptions.IgnoreCase);
             
 
-            if (!email_valid.Match(email.Text).Success)
+            if (!email_valid.Match(email.Value).Success)
                 err += "Please insert a valid email.<br />";
             else
             {
-                query = "SELECT Email FROM Users WHERE Email='" + email.Text + "'";
+                query = "SELECT Email FROM Users WHERE Email='" + email.Value + "'";
                 cmd.CommandText = query;
 
                 using (var rd = cmd.ExecuteReader(System.Data.CommandBehavior.SequentialAccess))
@@ -56,15 +56,17 @@ namespace VIA_Cinema.Account
             }
             Regex password_valid = new Regex(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$", RegexOptions.None);
             
-            if (!password_valid.Match(password.Text).Success)
+            if (!password_valid.Match(password.Value).Success)
                 err += "Please insert a valid password. At least 8 characters, at least one number and one letter.<br />";
-            else if (!password.Text.Equals(password2.Text))
+            else if (!password.Value.Equals(password2.Value))
                 err += "Two password does not match.<br />";
 
-            formError.Text = err;
+            formError.InnerHtml = "<p>"+err+"</p>";
+            formError.Visible = true;
 
             if (err.Equals(""))
             {
+                formError.Visible = false;
                 query = @"INSERT INTO Users (Email, Password)
                                 VALUES (@email, HASHBYTES('SHA2_256',@password));";
                 
@@ -72,8 +74,8 @@ namespace VIA_Cinema.Account
                 
                 cmd.Parameters.Add("@email", SqlDbType.VarChar);
                 cmd.Parameters.Add("@password", SqlDbType.VarBinary);
-                cmd.Parameters["@email"].Value = email.Text;
-                cmd.Parameters["@password"].Value = Encoding.ASCII.GetBytes(password.Text);
+                cmd.Parameters["@email"].Value = email.Value;
+                cmd.Parameters["@password"].Value = Encoding.ASCII.GetBytes(password.Value);
 
                 cmd.ExecuteNonQuery();
 
@@ -84,17 +86,17 @@ namespace VIA_Cinema.Account
 
                 //Log in
                 Session["UserID"] = userId;
-                Session["name"] = name.Text;
-                Session["Email"] = email.Text;
+                Session["name"] = name.Value;
+                Session["Email"] = email.Value;
 
                 //New row in registries
                 cmd.CommandText = @"INSERT INTO Registries (UserId, Name, Surname) VALUES(@ID, @name, @surname);";
                 cmd.Parameters.Add("@ID", SqlDbType.Int);
                 cmd.Parameters["@ID"].Value = userId;
                 cmd.Parameters.Add("@name", SqlDbType.VarChar);
-                cmd.Parameters["@name"].Value = name.Text;
+                cmd.Parameters["@name"].Value = name.Value;
                 cmd.Parameters.Add("@surname", SqlDbType.VarChar);
-                cmd.Parameters["@surname"].Value = surname.Text;
+                cmd.Parameters["@surname"].Value = surname.Value;
 
                 cmd.ExecuteNonQuery();
 

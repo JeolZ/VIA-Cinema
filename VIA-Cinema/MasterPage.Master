@@ -56,10 +56,11 @@
                     </asp:ContentPlaceHolder>
                 </div>
             </div>
-            <div class="jumbotron text-center" style="margin-bottom:0">
-                Bottom links <br />
-                Copyright, developer and stuff <br />
-                IT IS ALWAYS THE SAME
+            <div class="jumbotron text-center" style="margin-bottom:0; margin-top:40px; font-size: 12px;">
+                <b>VIA-CINEMA</b><br /><br />
+                Project developed by <b>Roberto Stagi</b>, <b>Joël Zhu</b> and <b>Léo Masnada</b><br />
+                Under the supervision of <b>Kim Peter Foged</b><br />
+                For the course <b>Internet technologies, C# and .NET (DNP1)</b> at <b>VIA University College</b>
             </div>
         </div>
     </form>

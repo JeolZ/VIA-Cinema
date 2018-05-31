@@ -16,7 +16,7 @@ namespace VIA_Cinema.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            formError.Visible = false;
         }
 
         protected void UserLogin(object sender, EventArgs e)
@@ -32,7 +32,7 @@ namespace VIA_Cinema.Account
             Regex email_valid = new Regex(@"\b[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}\b$", RegexOptions.IgnoreCase);
 
 
-            if (!email_valid.Match(email.Text).Success)
+            if (!email_valid.Match(email.Value).Success)
                 err += "Please insert a valid email.<br />";
 
             if (err.Equals(""))
@@ -41,17 +41,16 @@ namespace VIA_Cinema.Account
                                      AND Password=HASHBYTES('SHA2_256',@password);";
 
                 cmd.Parameters.Add("@email", SqlDbType.VarChar);
-                cmd.Parameters["@email"].Value = email.Text;
+                cmd.Parameters["@email"].Value = email.Value;
                 cmd.Parameters.Add("@password", SqlDbType.VarBinary);
-                cmd.Parameters["@password"].Value = Encoding.ASCII.GetBytes(password.Text);
+                cmd.Parameters["@password"].Value = Encoding.ASCII.GetBytes(password.Value);
 
 
                 var userId = cmd.ExecuteScalar();
 
                 if (userId == null)
-                    err += "Incorrect email. Try again.<br />";
+                    err += "Incorrect email or password. Try again.<br />";
                 else {
-
                     cmd.CommandText = @"SELECT Name FROM Registries WHERE UserId=@ID";
                     cmd.Parameters.Add("@ID", SqlDbType.Int);
                     cmd.Parameters["@ID"].Value = Convert.ToInt32(userId);
@@ -59,13 +58,16 @@ namespace VIA_Cinema.Account
                     //Log in
                     Session["UserID"] = Convert.ToInt32(userId);
                     Session["name"] = cmd.ExecuteScalar().ToString();
-                    Session["Email"] = email.Text;
+                    Session["Email"] = email.Value;
+                    cmd.CommandText = @"SELECT Surname FROM Registries WHERE UserId=@ID";
+                    Session["surname"] = cmd.ExecuteScalar().ToString();
 
-                    Response.Redirect("../index.aspx");
+                    Response.Redirect("MyAccount.aspx");
                 }
             }
             
-            formError.Text = err;
+            formError.InnerHtml = "<p>"+err+"</p>";
+            formError.Visible = true;
         }
     }
 }

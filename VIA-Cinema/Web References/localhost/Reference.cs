@@ -247,6 +247,8 @@ namespace VIA_Cinema.localhost {
         
         private Show[] showsField;
         
+        private string coverField;
+        
         /// <remarks/>
         public int Id {
             get {
@@ -304,6 +306,16 @@ namespace VIA_Cinema.localhost {
             }
             set {
                 this.showsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Cover {
+            get {
+                return this.coverField;
+            }
+            set {
+                this.coverField = value;
             }
         }
     }

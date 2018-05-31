@@ -1,5 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Movie.aspx.cs" Inherits="VIA_Cinema.Movie" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <title>Movie details</title>
+    <style>
+        img.movieImage {
+            width: 100%;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="headerContent" runat="server">
     <h1><asp:Label ID="title" runat="server" Text=""></asp:Label></h1>

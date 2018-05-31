@@ -34,11 +34,11 @@ namespace VIA_Cinema
                 days[i].InnerHtml = "";
                 foreach (var m in movies)
                 {
-                    days[i].InnerHtml += "<div class=\"media\">";
+                    days[i].InnerHtml += "<div class=\"media\" style=\"margin: 10px;\">";
                     days[i].InnerHtml += "<a href=\"Movie.aspx?movieId="+m.Id+"\">";
-                    days[i].InnerHtml += "<img class=\"media-left mr-3 mt-3\" src=\"\" style=\"width:150px\" /></a>";
+                    days[i].InnerHtml += "<img class=\"media-left mr-3 mt-3\" src=\""+m.Cover+"\" style=\"width:150px;\" /></a>";
                     days[i].InnerHtml += "<div class=\"media-body\">";
-                    days[i].InnerHtml += "<div class=\"card\">";
+                    days[i].InnerHtml += "<div class=\"card\" style=\"height: 250px\">";
                     days[i].InnerHtml += "<div class=\"card-body\">";
                     days[i].InnerHtml += "<a href=\"Movie.aspx?movieId=" + m.Id + "\">";
                     days[i].InnerHtml += "<h4 class=\"card-title\">" + m.Title + "</h4></a>";

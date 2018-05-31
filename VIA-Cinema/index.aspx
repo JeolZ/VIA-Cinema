@@ -2,53 +2,18 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>VIA Cinema</title>
-    <style>
-        #header{
-            /* here the background image should be changed every page */
-        }
-    </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="headerContent" runat="server">
    
-    <div id="demo" class="carousel slide" data-ride="carousel">
-
-      <!-- Indicators -->
-      <ul class="carousel-indicators">
-        <li data-target="#demo" data-slide-to="0" class="active"></li>
-        <li data-target="#demo" data-slide-to="1"></li>
-        <li data-target="#demo" data-slide-to="2"></li>
-      </ul>
-
-      <!-- The slideshow -->
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="la.jpg" alt="Los Angeles">
-        </div>
-        <div class="carousel-item">
-          <img src="chicago.jpg" alt="Chicago">
-        </div>
-        <div class="carousel-item">
-          <img src="ny.jpg" alt="New York">
-        </div>
-      </div>
-
-      <!-- Left and right controls -->
-      <a class="carousel-control-prev" href="#demo" data-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-      </a>
-      <a class="carousel-control-next" href="#demo" data-slide="next">
-        <span class="carousel-control-next-icon"></span>
-      </a>
-
-    </div>
-
+    <h1>Welcome to the VIA Cinema</h1>
+    <h3><small>The web portal to keep updated about the shown movies and book a seat whenever you want.</small></h3>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="contentTop" runat="server">
-    Don't know yet (this should be a "title" for the content below)
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="mainContent" runat="server">
-    Don't know yet (this should be an important content for the page)
+    Welcome to the <b>VIA Cinema</b>, a web portal to check all the movies on the screen, as well as booking a seat.<br />
+    Have a look at our movies this week checking the <b>What's On</b> page.
 </asp:Content>

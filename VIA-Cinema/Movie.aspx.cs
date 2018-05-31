@@ -22,6 +22,8 @@ namespace VIA_Cinema
 
             localhost.Movie m = via.GetMovieInfo(movieId);
 
+            image.ImageUrl = m.Cover;
+            image.CssClass = "movieImage";
             title.Text = m.Title;
             description.Text = m.Description;
             relDate.Text = m.ReleaseDate.ToString();
@@ -54,11 +56,6 @@ namespace VIA_Cinema
                                             s.Date.Hour + ":" + s.Date.Minute.ToString("00") + "</a>";
                 }
             }
-
-            /*
-             * print all the shows of the week
-             * 
-             * */
         }
     }
 }

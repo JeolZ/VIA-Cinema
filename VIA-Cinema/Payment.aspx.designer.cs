@@ -13,13 +13,13 @@ namespace VIA_Cinema {
     public partial class Payment {
         
         /// <summary>
-        /// summarize control.
+        /// summary control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label summarize;
+        protected global::System.Web.UI.WebControls.Label summary;
         
         /// <summary>
         /// formError control.
@@ -28,7 +28,16 @@ namespace VIA_Cinema {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label formError;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl formError;
+        
+        /// <summary>
+        /// savedCardsWrapper control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl savedCardsWrapper;
         
         /// <summary>
         /// savedCards control.
@@ -40,22 +49,13 @@ namespace VIA_Cinema {
         protected global::System.Web.UI.WebControls.DropDownList savedCards;
         
         /// <summary>
-        /// newCreditCard control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl newCreditCard;
-        
-        /// <summary>
         /// cardn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox cardn;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText cardn;
         
         /// <summary>
         /// owner control.
@@ -64,7 +64,7 @@ namespace VIA_Cinema {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox owner;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText owner;
         
         /// <summary>
         /// exp control.
@@ -73,7 +73,7 @@ namespace VIA_Cinema {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox exp;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl exp;
         
         /// <summary>
         /// code control.
@@ -82,7 +82,16 @@ namespace VIA_Cinema {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox code;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText code;
+        
+        /// <summary>
+        /// saveCardWrapper control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl saveCardWrapper;
         
         /// <summary>
         /// saveCard control.

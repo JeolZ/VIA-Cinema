@@ -20,6 +20,13 @@ namespace VIA_Cinema
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            formError.Visible = false;
+            if (Session["userId"] == null)
+            {
+                saveCardWrapper.Visible = false;
+                savedCardsWrapper.Visible = false;
+            }
+
             seats = (List<string>)Session["seats"];
             showId = (string)Session["showId"];
 
@@ -29,14 +36,16 @@ namespace VIA_Cinema
             totPrice = (float)Session["price"];
             totPrice *= seats.Count;
 
-            string summ = @"Summarize your order<br />Chosen seats: ";
-
+            string summ = "<p><b>Movie:</b> " + Session["title"] + "<br />";
+            summ += "<b>Room:</b> " + Session["room"] + "<br />";
+            summ += "<b>Date and Time:</b> " + Session["date"] + "<br />";
+            summ += "<b>Chosen seats:</b> ";
             foreach (string seat in seats)
                 summ += seat + " ";
 
-            summ += "<br />Total price: €" + totPrice + "<br /><br />";
+            summ += "<br /><b>Total price:</b> €" + totPrice + "</p>";
 
-            summarize.Text = summ;
+            summary.Text = summ;
 
             if (Session["userId"] != null)
             {
@@ -46,7 +55,7 @@ namespace VIA_Cinema
 
                 SqlCommand cmd = conn.CreateCommand();
 
-                cmd.CommandText = @"SELECT CreditCardN FROM CreditCards WHERE UserId=@userId";
+                cmd.CommandText = @"SELECT CreditCardN, ExpirationDate FROM CreditCards WHERE UserId=@userId";
                 cmd.Parameters.Add("@userId", SqlDbType.Int);
                 cmd.Parameters["@userId"].Value = Convert.ToInt32(Session["userId"]);
 
@@ -59,8 +68,17 @@ namespace VIA_Cinema
                 {
                     while (rd.Read())
                     {
+                        string cardN = rd["CreditCardN"].ToString();
+                        string expDate = rd["ExpirationDate"].ToString();
+
+                        CreditCardValidator c = new CreditCardValidator();
+                        int check = c.ValidCard(cardN, expDate);
+
+                        if (check != 0)
+                            continue;
+
                         ListItem l = new ListItem();
-                        l.Value = rd["CreditCardN"].ToString();
+                        l.Value = cardN;
                         l.Text = "************"+l.Value.Substring(12);
                         savedCards.Items.Add(l);
                     }
@@ -72,15 +90,11 @@ namespace VIA_Cinema
             }
         }
 
-        protected void ToggleNewCreditCard(object sender, EventArgs e)
-        {
-            newCreditCard.Visible = false;
-        }
-
         protected void CheckOrder(object sender, EventArgs e)
         {
             //clear error
-            formError.Text = "";
+            formError.Visible = false;
+            formError.InnerHtml = "";
             //database connection
             SqlConnection conn = new SqlConnection(
               ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
@@ -88,33 +102,39 @@ namespace VIA_Cinema
             SqlCommand cmd = conn.CreateCommand();
 
             //If we selected a saved card
-            if (!savedCards.SelectedValue.Equals("None"))
+            if (Session["userId"]!=null & !savedCards.SelectedValue.Equals("None"))
             {
                 //we don't need to check it
-                cardn.Text = savedCards.SelectedValue;
+                cardn.Value = savedCards.SelectedValue;
             }
             else
             {
                 //check credit card
                 CreditCardValidator c = new CreditCardValidator();
-                int check = c.ValidCard(cardn.Text, exp.Text.Remove(2, 1));
+                string expDate = "";
+                if (exp.Value.Length>6)
+                    expDate = exp.Value.Substring(5) + exp.Value.Substring(2, 2);
+                int check = c.ValidCard(cardn.Value, expDate);
                 if (check != 0)
                 {
-                    formError.Text = "Error " + check + "! Please check your Credit Card data.<br />";
+                    formError.InnerHtml = "<p>Error " + check + "! Please check your Credit Card data.</p>";
+                    formError.Visible = true;
                     return;
                 }
 
 
                 Regex code_valid = new Regex(@"^\d{3}$", RegexOptions.IgnoreCase);
-                if (!code_valid.Match(code.Text).Success)
+                if (!code_valid.Match(code.Value).Success)
                 {
-                    formError.Text = "Please insert a valid 3-digits code.<br />";
+                    formError.InnerHtml = "Please insert a valid 3-digits code.<br />";
+                    formError.Visible = true;
                     return;
                 }
 
-                if (owner.Text.Equals(""))
+                if (owner.Value.Equals(""))
                 {
-                    formError.Text = "Please insert an owner.<br />";
+                    formError.InnerHtml = "Please insert an owner.<br />";
+                    formError.Visible = true;
                     return;
                 }
 
@@ -130,10 +150,10 @@ namespace VIA_Cinema
                     comm.Parameters.Add("@own", SqlDbType.VarChar);
                     comm.Parameters.Add("@code", SqlDbType.Char);
                     comm.Parameters["@userId"].Value = Session["userId"];
-                    comm.Parameters["@card"].Value = cardn.Text;
-                    comm.Parameters["@exp"].Value = exp.Text.Remove(2, 1);
-                    comm.Parameters["@own"].Value = owner.Text;
-                    comm.Parameters["@code"].Value = code.Text;
+                    comm.Parameters["@card"].Value = cardn.Value;
+                    comm.Parameters["@exp"].Value = expDate;
+                    comm.Parameters["@own"].Value = owner.Value;
+                    comm.Parameters["@code"].Value = code.Value;
 
                     comm.ExecuteNonQuery();
                 }
@@ -153,7 +173,7 @@ namespace VIA_Cinema
             cmd.Parameters.Add("@showId", SqlDbType.Int);
             cmd.Parameters.Add("@card", SqlDbType.Char);
             cmd.Parameters["@showId"].Value = showId;
-            cmd.Parameters["@card"].Value = cardn.Text;
+            cmd.Parameters["@card"].Value = cardn.Value;
 
             if (Session["userId"] != null)
             {

@@ -13,6 +13,15 @@ namespace VIA_Cinema {
     public partial class ChooseSeats {
         
         /// <summary>
+        /// info control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label info;
+        
+        /// <summary>
         /// seats control.
         /// </summary>
         /// <remarks>
@@ -28,6 +37,6 @@ namespace VIA_Cinema {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label formError;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl formError;
     }
 }

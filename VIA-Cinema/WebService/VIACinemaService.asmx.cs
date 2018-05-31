@@ -65,7 +65,8 @@ namespace VIA_Cinema.WebService
                                     M.Title AS Title,
                                     M.Description AS Description,
                                     M.Duration AS Duration,
-                                    M.ReleaseDate AS ReleaseDate";
+                                    M.ReleaseDate AS ReleaseDate,
+                                    M.Cover AS Cover";
 
             if (id > 0 && days < 0)
             {
@@ -107,6 +108,7 @@ namespace VIA_Cinema.WebService
                                             rd["Description"].ToString(),
                                             Int32.Parse(rd["Duration"].ToString()),
                                             rd["ReleaseDate"].ToString().Substring(0, 10),
+                                            rd["Cover"].ToString(),
                                             null);
 
                         if (id <= 0 || days >= 0)

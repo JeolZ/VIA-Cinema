@@ -17,7 +17,7 @@ namespace VIA_Cinema.Account
             if (Session["userId"] == null)
                 Response.Redirect("Login.aspx");
 
-            if (Request.QueryString["showId"] != null && Request.QueryString["seatN"] != null)
+            if (Request.QueryString["showId"] != null)
             {
                 //delete it (checking for userId for security reasons)
                 SqlConnection conn = new SqlConnection(
@@ -26,15 +26,13 @@ namespace VIA_Cinema.Account
 
                 SqlCommand cmd = conn.CreateCommand();
 
-                cmd.CommandText = @"DELETE FROM Reservation
-                                    WHERE seatN=@seat AND showId=@show AND userId=@user";
+                cmd.CommandText = @"DELETE FROM Reservations
+                                    WHERE showId=@show AND userId=@user";
 
                 cmd.Parameters.Add("@user", SqlDbType.Int);
                 cmd.Parameters["@user"].Value = Session["userId"];
                 cmd.Parameters.Add("@show", SqlDbType.Int);
                 cmd.Parameters["@show"].Value = Convert.ToInt32(Request.QueryString["showId"]);
-                cmd.Parameters.Add("@seat", SqlDbType.VarChar);
-                cmd.Parameters["@seat"].Value = Request.QueryString["seatN"];
 
                 cmd.ExecuteNonQuery();
             }
