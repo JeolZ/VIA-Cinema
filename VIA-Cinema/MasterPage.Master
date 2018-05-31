@@ -51,10 +51,10 @@
                     <asp:ContentPlaceHolder ID="contentTop" runat="server">
                     </asp:ContentPlaceHolder>
                 </h1>
-                <p>
+                <div class="container-fluid">
                     <asp:ContentPlaceHolder ID="mainContent" runat="server">
                     </asp:ContentPlaceHolder>
-                </p>
+                </div>
             </div>
             <div class="jumbotron text-center" style="margin-bottom:0">
                 Bottom links <br />

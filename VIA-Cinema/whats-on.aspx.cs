@@ -26,6 +26,11 @@ namespace VIA_Cinema
             {
                 localhost.Movie[] movies = via.GetMoviesOfDay(i);
 
+                if (movies.Length == 0)
+                {
+                    days[i].InnerHtml = "<i>No films today.</i>";
+                    continue;
+                }
                 days[i].InnerHtml = "";
                 foreach (var m in movies)
                 {
@@ -41,7 +46,7 @@ namespace VIA_Cinema
                     days[i].InnerHtml += "<p>" + m.Duration + "mins</p>";
                     foreach (var s in m.Shows)
                         days[i].InnerHtml += "<a data-toggle=\"tooltip\" class=\"btn btn-primary\" href=\"ChooseSeats.aspx?showId=" + s.Id
-                                                + "\" style=\"font-size: 12px; padding: 2px;\" title=\"Room "+s.Room+"\">" +
+                                                + "\" style=\"font-size: 12px; margin: 2px;\" title=\"Room "+s.Room+"\">" +
                                                 s.Date.Hour + ":" + s.Date.Minute.ToString("00")+"</a>";
                     days[i].InnerHtml += "</div></div></div></div>";
                 }

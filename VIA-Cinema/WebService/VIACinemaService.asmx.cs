@@ -106,7 +106,7 @@ namespace VIA_Cinema.WebService
                                             rd["Title"].ToString(),
                                             rd["Description"].ToString(),
                                             Int32.Parse(rd["Duration"].ToString()),
-                                            rd["ReleaseDate"].ToString(),
+                                            rd["ReleaseDate"].ToString().Substring(0, 10),
                                             null);
 
                         if (id <= 0 || days >= 0)
