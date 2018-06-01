@@ -67,7 +67,7 @@ namespace VIA_Cinema
                 SqlCommand cmd = conn.CreateCommand();
 
                 //set the query to retrieve all saved credit cards
-                cmd.CommandText = @"SELECT CreditCardN, ExpirationDate FROM CreditCards WHERE UserId=@userId";
+                cmd.CommandText = @"SELECT CreditCardN, ExpirationDate, Owner FROM CreditCards WHERE UserId=@userId";
                 //set the parameters
                 cmd.Parameters.Add("@userId", SqlDbType.Int);
                 cmd.Parameters["@userId"].Value = Convert.ToInt32(Session["userId"]);
@@ -86,6 +86,8 @@ namespace VIA_Cinema
                         //take the credit card number and the expiration date
                         string cardN = rd["CreditCardN"].ToString();
                         string expDate = rd["ExpirationDate"].ToString();
+                        string owner = rd["Owner"].ToString();
+
                         //check if they're still valid
                         CreditCardValidator c = new CreditCardValidator();
                         int check = c.ValidCard(cardN, expDate);
@@ -97,7 +99,7 @@ namespace VIA_Cinema
                         //else, put the card inside the drop down list
                         ListItem l = new ListItem();
                         l.Value = cardN;
-                        l.Text = "************"+l.Value.Substring(12);
+                        l.Text = "****-****-****-"+cardN.Substring(12)+" "+expDate.Substring(0, 2)+"/"+expDate.Substring(2)+" "+owner;
                         savedCards.Items.Add(l);
                     }
                 }

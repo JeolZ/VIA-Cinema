@@ -72,6 +72,7 @@
   <ItemGroup>
     <Content Include="about.aspx" />
     <Content Include="Account\DeleteBooking.aspx" />
+    <Content Include="Account\DeleteCard.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\MyAccount.aspx" />
     <Content Include="Account\Registration.aspx" />
@@ -89,6 +90,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <Content Include="Movie.aspx" />
+    <Content Include="Movies.aspx" />
     <Content Include="Payment.aspx" />
     <Content Include="ThankYou.aspx" />
     <Content Include="Web References\com.ftipgw.secure\Reference.map">
@@ -141,6 +143,13 @@
     </Compile>
     <Compile Include="Account\DeleteBooking.aspx.designer.cs">
       <DependentUpon>DeleteBooking.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\DeleteCard.aspx.cs">
+      <DependentUpon>DeleteCard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\DeleteCard.aspx.designer.cs">
+      <DependentUpon>DeleteCard.aspx</DependentUpon>
     </Compile>
     <Compile Include="Account\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -204,6 +213,13 @@
     </Compile>
     <Compile Include="Movie.aspx.designer.cs">
       <DependentUpon>Movie.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Movies.aspx.cs">
+      <DependentUpon>Movies.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Movies.aspx.designer.cs">
+      <DependentUpon>Movies.aspx</DependentUpon>
     </Compile>
     <Compile Include="Payment.aspx.cs">
       <DependentUpon>Payment.aspx</DependentUpon>

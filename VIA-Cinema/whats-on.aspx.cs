@@ -44,12 +44,12 @@ namespace VIA_Cinema
                     days[i].InnerHtml += "<a href=\"Movie.aspx?movieId="+m.Id+"\">";
                     days[i].InnerHtml += "<img class=\"media-left mr-3 mt-3\" src=\""+m.Cover+"\" style=\"width:150px;\" /></a>";
                     days[i].InnerHtml += "<div class=\"media-body\">";
-                    days[i].InnerHtml += "<div class=\"card\" style=\"height: 250px\">";
+                    days[i].InnerHtml += "<div class=\"card\" style=\"min-height: 250px\">";
                     days[i].InnerHtml += "<div class=\"card-body\">";
                     days[i].InnerHtml += "<a href=\"Movie.aspx?movieId=" + m.Id + "\">";
                     days[i].InnerHtml += "<h4 class=\"card-title\">" + m.Title + "</h4></a>";
                     days[i].InnerHtml += "<p class=\"card-text\">" + m.Description.Substring(0, 250) + "...</p>";
-                    days[i].InnerHtml += "<p>" + m.Duration + "mins</p>";
+                    days[i].InnerHtml += "<p style=\"font-size: 12px\">Duration: " + m.Duration + "'</p>";
                     foreach (var s in m.Shows)
                         days[i].InnerHtml += "<a data-toggle=\"tooltip\" class=\"btn btn-primary\" href=\"ChooseSeats.aspx?showId=" + s.Id
                                                 + "\" style=\"font-size: 12px; margin: 2px;\" title=\"Room "+s.Room+"\">" +

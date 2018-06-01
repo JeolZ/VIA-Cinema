@@ -88,8 +88,8 @@ namespace VIA_Cinema.localhost {
         public event GetMovieInfoCompletedEventHandler GetMovieInfoCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://localhost/Get all movies from today", RequestElementName="Get all movies from today", RequestNamespace="http://localhost/", ResponseElementName="Get all movies from todayResponse", ResponseNamespace="http://localhost/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlArrayAttribute("Get all movies from todayResult")]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://localhost/Get all movies from today, without shows info", RequestElementName="Get all movies from today, without shows info", RequestNamespace="http://localhost/", ResponseElementName="Get all movies from today, without shows infoResponse", ResponseNamespace="http://localhost/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlArrayAttribute("Get all movies from today, without shows infoResult")]
         public Movie[] GetAllMovies() {
             object[] results = this.Invoke("GetAllMovies", new object[0]);
             return ((Movie[])(results[0]));

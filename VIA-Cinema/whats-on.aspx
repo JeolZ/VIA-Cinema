@@ -10,11 +10,21 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="contentTop" runat="server">
-    <h3>This week movies:</h3>
-    <h4><small>To book, press the time you would like to go to the Cinema.</small></h4>
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="mainContent" runat="server">
+    <div class="row">
+        <div class="col-10">
+            <h3>This week movies:</h3>
+            <h4><small>To book, press the time you would like to go to the Cinema.</small></h4>
+        </div>
+        <div class="col-2">
+            <div class="btn-group">
+              <a href="#" class="btn btn-primary active">Week</a>
+              <a href="Movies.aspx" class="btn btn-secondary">All</a>
+            </div>
+        </div>
+    </div>
     <!-- Nav tabs -->
     <ul class="nav nav-tabs">
       <li class="nav-item">

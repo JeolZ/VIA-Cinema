@@ -20,6 +20,7 @@
         <a href="LogOut.aspx" class="btn btn-primary">Log out</a>
     </div>
 
+    
     <!-- booking management -->
     <h4 data-toggle="collapse" data-target="#mainContent_bookingsListWrapper" style="cursor: pointer" title="click to show">Your active bookings:</h4>
     <div id="bookingsListWrapper" runat="server" class="collapse">
@@ -28,6 +29,56 @@
         </tbody>
     </table>
     </div>
+    <br /><br />
+    
+    <!--error-->
+    <div class="alert alert-danger" id="newCardError" runat="server">
+    </div>
+    <!-- credit cards management -->
+    <h4 data-toggle="collapse" data-target="#mainContent_creditCardsWrapper" style="cursor: pointer" title="click to show">Your saved credit cards:</h4>
+    <div id="creditCardsWrapper" runat="server" class="collapse">
+    <table class="table table-hover">
+        <thead>
+        </thead>
+    </table>
+    <table id="creditCards" class="table table-hover" runat="server">
+        <thead>
+        <tr>
+            <th>Credit Card Number</th>
+            <th>Expiration date</th>
+            <th>Owner</th>
+            <th></th>
+        </tr>
+        </thead>
+    </table>
+    <i id="creditCardsNotFound" runat="server"></i>
+    <b data-toggle="collapse" data-target="#newCardWrapper" style="cursor: pointer">Click here to add a new one!</b>
+    <div id="newCardWrapper" class="collapse">
+        <!--credit card number-->
+        <div class="form-group">
+            <label for="name">Credit Card Number:</label>
+            <input type="text" maxlength="16" class="form-control" id="cardn" runat="server" placeholder="Enter your Credit Card Number">
+        </div>
+        <!--owner name-->
+        <div class="form-group">
+            <label for="owner">Owner:</label>
+            <input type="text" class="form-control" id="owner" runat="server" placeholder="Enter the name of the Owner">
+        </div>
+        <!--expiration date-->
+        <div class="form-group">
+            <label for="exp">Expiration Date:</label>
+            <input type="month" class="form-control" id="exp" runat="server">
+        </div>
+        <!--CVV-->
+        <div class="form-group">
+            <label for="name">Security Code:</label>
+            <input type="text" maxlength="3" class="form-control" id="code" runat="server" placeholder="Enter your 3-digit Security Code">
+        </div>
+
+        <asp:button runat="server" text="Add the new Card" onclick="AddCard" class="btn btn-primary" />
+    </div>
+    </div>
+
     <br /><br />
     
     <!-- edit personal data -->

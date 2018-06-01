@@ -20,7 +20,7 @@ namespace VIA_Cinema.WebService
     public class VIACinemaService : System.Web.Services.WebService
     {
 
-        [WebMethod(MessageName = "Get all movies from today")]
+        [WebMethod(MessageName = "Get all movies from today, without shows info")]
         public Movie[] GetAllMovies()
         {
             return query(0, -1);
@@ -70,7 +70,18 @@ namespace VIA_Cinema.WebService
                                     M.ReleaseDate AS ReleaseDate,
                                     M.Cover AS Cover";
 
-            if (id > 0 && days < 0) //if we want just the movie info
+            if(id<=0 && days < 0) // if we want just all the movies (without the shows)
+            {
+                query += @" FROM Movies AS M 
+                            WHERE M.MovieId IN (
+                                SELECT DISTINCT M.MovieID AS MovieId
+                                FROM Movies AS M
+                                LEFT JOIN Shows AS S ON M.MovieId=S.MovieId 
+                                WHERE M.ReleaseDate > GETDATE( )
+                                    OR S.Date >= GETDATE( )
+                                )
+                            ORDER BY M.ReleaseDate ASC";
+            }else if (id > 0 && days < 0) //if we want just the movie info
             {
                 //get the fields just from the table Movies
                 query += " FROM Movies AS M WHERE M.MovieId = " + id;
@@ -123,7 +134,7 @@ namespace VIA_Cinema.WebService
                                             null);
 
                         //if we want the shows
-                        if (id <= 0 || days >= 0)
+                        if (days >= 0)
                         {
                             //read until the curId is the same (now we need preId)
                             List<Show> shows = new List<Show>();

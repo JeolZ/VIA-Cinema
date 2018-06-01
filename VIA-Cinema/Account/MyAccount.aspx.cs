@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
+using VIA_Cinema.com.ftipgw.secure;
 
 namespace VIA_Cinema.Account
 {
@@ -32,6 +33,7 @@ namespace VIA_Cinema.Account
             //hide the error divs
             formError1.Visible = false;
             formError2.Visible = false;
+            newCardError.Visible = false;
 
             //set up the hi message
             hi.Text = "Hi, " + Session["name"];
@@ -83,8 +85,120 @@ namespace VIA_Cinema.Account
                 if (i == 0) //if there are no records, print this message
                     bookingsListWrapper.InnerHtml = "<i>No bookings found</i>";
             }
+
+            //retrieve credit cards
+            //set the query
+            cmd.CommandText = @"SELECT CreditCardN, ExpirationDate, Owner FROM CreditCards WHERE UserId=@id";
+
+            //read the result
+            using (var rd = cmd.ExecuteReader(System.Data.CommandBehavior.SequentialAccess))
+            {
+                int i = 1;
+                while (rd.Read())
+                {
+                    //take the credit card number and the expiration date
+                    string cardN = rd["CreditCardN"].ToString();
+                    string expDate = rd["ExpirationDate"].ToString();
+                    string owner = rd["Owner"].ToString();
+
+                    //add a new row to the table
+                    creditCards.Rows.Add(new HtmlTableRow());
+
+                    //add a cell with a the credit card number
+                    HtmlTableCell cell = new HtmlTableCell();
+                    cell.InnerHtml = "****-****-****-" + cardN.Substring(12);
+                    creditCards.Rows[i].Cells.Add(cell);
+
+                    //add a cell with a the expiration date
+                    cell = new HtmlTableCell();
+                    cell.InnerHtml = expDate.Substring(0, 2) + "/" + expDate.Substring(2);
+                    creditCards.Rows[i].Cells.Add(cell);
+
+                    //add a cell with a the owner name
+                    cell = new HtmlTableCell();
+                    cell.InnerHtml = owner;
+                    creditCards.Rows[i].Cells.Add(cell);
+
+                    //add a cell with a "delete" button to delete the credit card
+                    cell = new HtmlTableCell();
+                    cell.InnerHtml = "<a class=\"btn btn-primary\" href=\"DeleteCard.aspx?cardN=" + cardN + "\">Delete</a>";
+                    creditCards.Rows[i].Cells.Add(cell);
+                    i++;
+                }
+                if (i == 1) //if there are no records, print this message
+                    creditCardsNotFound.InnerText = "No saved credit cards found.";
+            }
+
             //close the db connection
             conn.Close();
+        }
+
+        protected void AddCard(object sender, EventArgs e)
+        {
+            //hide error div
+            newCardError.Visible = false;
+            //check credit card
+            CreditCardValidator c = new CreditCardValidator();
+            string expDate = "";
+            //if the field has been set
+            if (exp.Value.Length > 6)
+                //convert it into the form mmyy
+                expDate = exp.Value.Substring(5) + exp.Value.Substring(2, 2);
+
+            //check the credit card validity
+            int check = c.ValidCard(cardn.Value, expDate);
+            if (check != 0)
+            {
+                //if it's not valid, show an error
+                newCardError.InnerHtml = "<p>Error " + check + "! Please check your Credit Card data.</p>";
+                newCardError.Visible = true;
+                return;
+            }
+
+            //regex for the CVV code (3 digits)
+            Regex code_valid = new Regex(@"^\d{3}$", RegexOptions.IgnoreCase);
+            if (!code_valid.Match(code.Value).Success)
+            {
+                newCardError.InnerHtml = "Please insert a valid 3-digits code.<br />";
+                newCardError.Visible = true;
+                return;
+            }
+
+            //if it has not been inserted an owner name, show an error
+            if (owner.Value.Equals(""))
+            {
+                newCardError.InnerHtml = "Please insert an owner.<br />";
+                newCardError.Visible = true;
+                return;
+            }
+
+            //db connection
+            SqlConnection conn = new SqlConnection(
+                   ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
+            conn.Open();
+            //create the command
+            SqlCommand comm = conn.CreateCommand();
+            //set the query
+            comm.CommandText = @"INSERT INTO CreditCards
+                                    (UserId, CreditCardN, ExpirationDate, Owner, SecCode)
+                                    VALUES(@userId, @card, @exp, @own, @code)";
+            //set the parameters
+            comm.Parameters.Add("@userId", SqlDbType.Int);
+            comm.Parameters.Add("@card", SqlDbType.Char);
+            comm.Parameters.Add("@exp", SqlDbType.Char);
+            comm.Parameters.Add("@own", SqlDbType.VarChar);
+            comm.Parameters.Add("@code", SqlDbType.Char);
+            comm.Parameters["@userId"].Value = Session["userId"];
+            comm.Parameters["@card"].Value = cardn.Value;
+            comm.Parameters["@exp"].Value = expDate;
+            comm.Parameters["@own"].Value = owner.Value;
+            comm.Parameters["@code"].Value = code.Value;
+            //execute the query to insert the credit card
+            comm.ExecuteNonQuery();
+            //close connection
+            conn.Close();
+            //refresh the page
+            Response.Redirect(Request.RawUrl);
         }
 
         protected void EditData(object sender, EventArgs e)
@@ -128,11 +242,15 @@ namespace VIA_Cinema.Account
                 //update session name and surname
                 Session["name"] = name.Value;
                 Session["surname"] = surname.Value;
-                //update hi message
-                hi.Text = "Hi, " + Session["name"];
 
                 //execute the query
                 cmd.ExecuteNonQuery();
+
+                //close connection
+                conn.Close();
+
+                //refresh the page
+                Response.Redirect(Request.RawUrl);
             }
             else
             {
@@ -192,6 +310,12 @@ namespace VIA_Cinema.Account
                         cmd.Parameters["@newPassword"].Value = Encoding.ASCII.GetBytes(password.Value);
                         //execute the query to update the password
                         cmd.ExecuteNonQuery();
+
+                        //close connection
+                        conn.Close();
+                        
+                        //refresh the page
+                        Response.Redirect(Request.RawUrl);
                     }
                 }
             }

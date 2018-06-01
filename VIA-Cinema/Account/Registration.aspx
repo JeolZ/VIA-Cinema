@@ -42,7 +42,7 @@
     
     <!-- password confirmation -->
     <div class="form-group">
-        <label for="password2">Password:</label>
+        <label for="password2">Confirm password:</label>
         <input type="password" class="form-control" id="password2" runat="server" placeholder="Enter again your password">
     </div>
     

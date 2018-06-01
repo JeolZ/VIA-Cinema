@@ -16,22 +16,19 @@
         <div class="col-md-4 col-sm-12">
             <h3 class="title">Info</h3>
 
-            <div class="details-wrapper">
+            <div>
                 <p>If you want to contact us, please use the following data (the contact form doesn't work):</p>
 
-                <ul class="contact-details">
+                <ul>
                     <li>
-                        <i class="icon-phone"></i>
                         <strong>Phone:</strong>
                         <span>(123) 123-456 </span>
                     </li>
                     <li>
-                        <i class="icon-printer"></i>
                         <strong>Fax:</strong>
                         <span>(123) 123-456 </span>
                     </li>
                     <li>
-                        <i class="icon-paper-plane"></i>
                         <strong>E-Mail:</strong>
                         <span><a href="#">info@viacinema.com</a></span>
                     </li>
