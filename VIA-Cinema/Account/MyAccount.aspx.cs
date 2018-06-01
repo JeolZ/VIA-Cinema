@@ -15,6 +15,14 @@ namespace VIA_Cinema.Account
 {
     public partial class MyAccount : System.Web.UI.Page
     {
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            //initialize the personal data fields
+            email.Value = Session["Email"].ToString();
+            name.Value = Session["name"].ToString();
+            surname.Value = Session["surname"].ToString();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             //if it's not logged in, redirect to the login
@@ -27,11 +35,6 @@ namespace VIA_Cinema.Account
 
             //set up the hi message
             hi.Text = "Hi, " + Session["name"];
-
-            //initialize the personal data fields
-            email.Value = Session["Email"].ToString();
-            name.Value = Session["name"].ToString();
-            surname.Value = Session["surname"].ToString();
 
             //retrieve active bookings
             //db connection
@@ -100,6 +103,7 @@ namespace VIA_Cinema.Account
 
             //regex for name and surname
             Regex name_valid = new Regex(@"^[a-zA-Z\s]*$");
+
             //if the name doesn't match, update the error
             if (!name_valid.Match(name.Value).Success)
                 err += "Insert a valid name.<br />";
@@ -120,6 +124,12 @@ namespace VIA_Cinema.Account
                 cmd.Parameters["@name"].Value = name.Value;
                 cmd.Parameters.Add("@surname", SqlDbType.VarChar);
                 cmd.Parameters["@surname"].Value = surname.Value;
+
+                //update session name and surname
+                Session["name"] = name.Value;
+                Session["surname"] = surname.Value;
+                //update hi message
+                hi.Text = "Hi, " + Session["name"];
 
                 //execute the query
                 cmd.ExecuteNonQuery();
