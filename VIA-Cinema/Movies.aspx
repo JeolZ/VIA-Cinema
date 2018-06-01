@@ -18,7 +18,7 @@
         </div>
         <div class="col-2">
             <div class="btn-group">
-              <a href="whats-on.aspx" class="btn btn-secondary">Week</a>
+              <a href="WhatsOn.aspx" class="btn btn-secondary">Week</a>
               <a href="#" class="btn btn-primary active">All</a>
             </div>
         </div>

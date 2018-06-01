@@ -13,6 +13,9 @@
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="mainContent" runat="server">
+    <!--Go back button-->
+    <asp:HyperLink ID="back" runat="server" CssClass="btn btn-primary">Go back</asp:HyperLink>
+
     <!--Summary of the purchase-->
     <div class="alert alert-info">
         <h4>Check your purchase:</h4>

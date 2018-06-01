@@ -10,7 +10,7 @@
 namespace VIA_Cinema {
     
     
-    public partial class whats_on {
+    public partial class WhatsOn {
         
         /// <summary>
         /// d1 control.

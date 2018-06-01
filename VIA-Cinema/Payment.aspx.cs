@@ -23,7 +23,7 @@ namespace VIA_Cinema
         {
             //hide the error div
             formError.Visible = false;
-
+            
             //if it's not logged in, hide the dropdown list and the checkbox
             if (Session["userId"] == null)
             {
@@ -39,6 +39,9 @@ namespace VIA_Cinema
             //redirect to the main page
             if(seats==null || showId == null || Session["price"]==null)
                 Response.Redirect("index.aspx");
+
+            //set link
+            back.NavigateUrl = "ChooseSeats.aspx?showId=" + showId;
 
             //save the tot price
             totPrice = (float)Session["price"];

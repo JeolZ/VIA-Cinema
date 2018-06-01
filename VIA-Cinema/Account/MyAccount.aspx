@@ -17,7 +17,7 @@
     <!-- hi message and logout button -->
     <div style="text-align: center; font-size: 20px;">
         <h3><asp:Label ID="hi" runat="server" Text=""></asp:Label></h3>
-        <a href="LogOut.aspx" class="btn btn-primary">Log out</a>
+        <div id="log" runat="server"></div>
     </div>
 
     

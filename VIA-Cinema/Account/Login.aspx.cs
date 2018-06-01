@@ -65,6 +65,12 @@ namespace VIA_Cinema.Account
                     Session["Email"] = email.Value;
                     cmd.CommandText = @"SELECT Surname FROM Registries WHERE UserId=@ID";
                     Session["surname"] = cmd.ExecuteScalar().ToString();
+
+                    //check if it's an admin
+                    cmd.CommandText = @"SELECT Admin FROM Users WHERE UserId=@ID";
+                    if (Convert.ToBoolean(cmd.ExecuteScalar()))
+                        Session["admin"] = true;
+
                     //redirect to MyAccount
                     Response.Redirect("MyAccount.aspx");
                 }

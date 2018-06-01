@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="about.aspx.cs" Inherits="VIA_Cinema.about" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="About.aspx.cs" Inherits="VIA_Cinema.About" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>About us</title>
 </asp:Content>

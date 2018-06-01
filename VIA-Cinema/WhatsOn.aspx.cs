@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 
 namespace VIA_Cinema
 {
-    public partial class whats_on : System.Web.UI.Page
+    public partial class WhatsOn : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

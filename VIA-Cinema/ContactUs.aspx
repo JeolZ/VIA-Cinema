@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="contact-us.aspx.cs" Inherits="VIA_Cinema.contact_us" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="ContactUs.aspx.cs" Inherits="VIA_Cinema.ContactUs" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>Contact us</title>
 </asp:Content>

@@ -11,7 +11,7 @@ namespace VIA_Cinema
 {
 
 
-    public partial class contact_us
+    public partial class ContactUs
     {
     }
 }

@@ -11,7 +11,7 @@ namespace VIA_Cinema
 {
 
 
-    public partial class about
+    public partial class About
     {
     }
 }
