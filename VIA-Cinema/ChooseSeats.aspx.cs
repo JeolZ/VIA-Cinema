@@ -14,7 +14,7 @@ namespace VIA_Cinema
     public partial class ChooseSeats : System.Web.UI.Page
     {
         //global attributes
-        List<CheckBox> seatsCheck = new List<CheckBox>();
+        Dictionary<string, CheckBox> seatsCheck = new Dictionary<string, CheckBox>();
         float price;
         string title, date;
         int room;
@@ -127,8 +127,17 @@ namespace VIA_Cinema
                     CheckBox cb = new CheckBox() { ID = id };
                     seats.Rows[i].Cells[j].Controls.Add(cb);
                     seats.Rows[i].Cells[j].CssClass = "AvailableSeat";
-                    seatsCheck.Add(cb);
+                    seatsCheck.Add(id, cb);
                 }
+            }
+
+            //if there are still in session the seats relative to this show
+            if (Session["seats"] != null && Session["showId"]!=null
+                && Convert.ToInt32(Session["showId"])==showId)
+            {
+                //check them as selected
+                foreach (string id in (List<string>)Session["seats"])
+                    seatsCheck[id].Checked = true;
             }
         }
 
@@ -137,7 +146,7 @@ namespace VIA_Cinema
         {
             //retrieve all the checked seats
             List<string> chosenSeats = new List<string>();
-            foreach (var s in seatsCheck)
+            foreach (var s in seatsCheck.Values)
             {
                 if (s.Checked) //if checked
                     chosenSeats.Add(s.ID); //save the ID
