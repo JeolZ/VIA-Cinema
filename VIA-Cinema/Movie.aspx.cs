@@ -31,7 +31,7 @@ namespace VIA_Cinema
             //set the title, description and other info
             title.Text = m.Title;
             description.Text = m.Description;
-            relDate.Text = m.ReleaseDate.ToString();
+            relDate.Text = m.ReleaseDate;
             duration.Text = m.Duration.ToString();
 
             //put the day name (week name, like "mon", "tus", "wed", etc)
@@ -43,7 +43,10 @@ namespace VIA_Cinema
 
             //save to an indexed array the cells where to put the shows times
             HtmlTableCell[] days = { day0_content, day1_content, day2_content, day3_content, day4_content, day5_content, day6_content };
-            
+
+            //variable to check if there is at least one show this week
+            bool check = false;
+
             //for the 7 days (a week)
             for (int i = 0; i < 7; i++)
             {
@@ -59,6 +62,8 @@ namespace VIA_Cinema
                     continue;
                 }
 
+                //check if there is at least one show this week
+                check = true;
                 days[i].InnerHtml = "";
                 foreach (var s in shows)
                 {
@@ -72,6 +77,16 @@ namespace VIA_Cinema
                                             + "\" style=\"font-size: 12px; margin: 2px;\" title=\"Room " + s.Room + ": " + s.AvailableSeats + " seats left\">" +
                                             s.Date.Hour + ":" + s.Date.Minute.ToString("00") + "</a>";
                 }
+            }
+
+            DateTime rDate = DateTime.ParseExact(m.ReleaseDate, "dd/MM/yyyy",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+            if (!check)
+            {
+                if (rDate > DateTime.Now)
+                    showsWrapper.InnerHtml = "<h4><small>Coming soon!</small></h4>";
+                else
+                    showsWrapper.InnerHtml = "<h4><small>No shows planned this week.</small></h4>";
             }
         }
     }

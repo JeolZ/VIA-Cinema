@@ -39,7 +39,7 @@ namespace VIA_Cinema.WebService
                 return null;
 
             Movie[] m = query(id, day);
-            if(m.Length > 0)
+            if(m!=null && m.Length > 0)
                 return m[0].Shows;
             return null;
         }
@@ -50,7 +50,10 @@ namespace VIA_Cinema.WebService
             if (id <= 0)
                 return null;
 
-            return query(id, -1)[0];
+            Movie[] m = query(id, -1);
+            if (m != null && m.Length > 0)
+                return m[0];
+            return null;
         }
 
         //the main method, called from every WebMethod

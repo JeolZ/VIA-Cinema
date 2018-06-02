@@ -6,44 +6,67 @@
     <style>
         img.movieImage {
             width: 100%;
+            max-width: 300px;
+            margin: 20px;
+            margin-top: -80px;
+            box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        div.custom-header {
+            background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('images/movies/avengers.jpg') no-repeat fixed 50% 10%;
+            background-size: cover;
+            height: 350px;
+        }
+        @media(max-width:767px) {
+            h1.title {
+                color: #0c0c0c;
+                text-align: center;
+            }
+            img.movieImage {
+                width: 300px;
+            }
+        }
+        @media(min-width:768px) {
+            h1.title {
+                color: #FFF;
+            }
         }
     </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="headerContent" runat="server">
-    <h1><asp:Label ID="title" runat="server" Text=""></asp:Label></h1>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="contentTop" runat="server">
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="mainContent" runat="server">
+    <div class="row" style="margin-top: -250px;">
+        <div class="col-md-4 col-sd-12" style="text-align: center">
+            <asp:Image ID="image" runat="server" />
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <h1 class="title"><asp:Label ID="title" runat="server" Text=""></asp:Label></h1>
+        </div>
+    </div>
     <div class="row">
         <!--movie info-->
-        <div class="col-8">
-            <div class="row">
-                <!--image-->
-                <div class="col-5">
-                    <asp:Image ID="image" runat="server" />
-                </div>
-                <!--plot and other info-->
-                <div class="col-7">
-                    <h3>Plot</h3>
-                    <p>
-                        <asp:Label ID="description" runat="server" Text=""></asp:Label>
-                    </p>
-                    <p style="font-size: 12px;">
-                        Duration: <asp:Label ID="duration" runat="server" Text=""></asp:Label>'
-                    </p>
-                    <p style="font-size: 12px;">
-                        Realeased on: <asp:Label ID="relDate" runat="server" Text=""></asp:Label>
-                    </p>
-                </div>
-            </div>
+        <div class="col-md-7 col-sm-12" style="padding: 50px;">
+            <h3>Plot</h3>
+            <p>
+                <asp:Label ID="description" runat="server" Text=""></asp:Label>
+            </p>
+            <p style="font-size: 12px;">
+                Duration: <asp:Label ID="duration" runat="server" Text=""></asp:Label>'
+            </p>
+            <p style="font-size: 12px;">
+                Realeased on: <asp:Label ID="relDate" runat="server" Text=""></asp:Label>
+            </p>
         </div>
         <!--shows info (for the week)-->
-        <div class="col-4">
-            <h3>Shows:</h3>
+        <div class="col-md-5 col-sd-12" style="padding: 50px;">
+            <h3>Next Shows:</h3>
+            <div id="showsWrapper" runat="server">
             <h4><small>To book, press the time you would like to go to the Cinema.</small></h4>
             <table class="table table-hover">
                 <tbody>
@@ -77,6 +100,7 @@
                   </tr>
                 </tbody>
             </table>
+            </div>
         </div>
     </div>
 

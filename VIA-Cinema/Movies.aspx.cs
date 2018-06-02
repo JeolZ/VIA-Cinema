@@ -31,7 +31,10 @@ namespace VIA_Cinema
                 movieList.InnerHtml += "<div class=\"card-body\">";
                 movieList.InnerHtml += "<a href=\"Movie.aspx?movieId=" + m.Id + "\">";
                 movieList.InnerHtml += "<h4 class=\"card-title\">" + m.Title + "</h4></a>";
-                movieList.InnerHtml += "<p class=\"card-text\">" + m.Description.Substring(0, 250) + "...</p>";
+                if(m.Description.Length > 250)
+                    movieList.InnerHtml += "<p class=\"card-text\">" + m.Description.Substring(0, 250) + "...</p>";
+                else
+                    movieList.InnerHtml += "<p class=\"card-text\">" + m.Description + "</p>";
                 movieList.InnerHtml += "<p style=\"font-size: 12px\">Duration: " + m.Duration + "'</p>";
                 movieList.InnerHtml += "<p style=\"font-size: 12px\">Release Date: " + m.ReleaseDate + "'</p>";
                 movieList.InnerHtml += "</div></div></div></div>";

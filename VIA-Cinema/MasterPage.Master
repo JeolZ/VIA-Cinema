@@ -29,7 +29,7 @@
         <div class="container-fluid">
             <div class="header">
                 <!--navbar-->
-                <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+                <nav id="menuNavBar" class="navbar navbar-expand-sm bg-dark navbar-dark">
                     <!--"logo"-->
                     <a class="navbar-brand" href="#">VIA Cinema</a>
                     
@@ -44,7 +44,7 @@
                     </div>
                 </nav>
                 <!--header-->
-                <div class="jumbotron jumbotron-fluid">
+                <div class="jumbotron jumbotron-fluid custom-header">
                     <div class="container-fluid">
                         <asp:ContentPlaceHolder ID="headerContent" runat="server">
                         </asp:ContentPlaceHolder>
