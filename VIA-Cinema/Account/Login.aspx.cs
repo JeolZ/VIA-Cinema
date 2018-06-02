@@ -18,6 +18,9 @@ namespace VIA_Cinema.Account
         {
             //set invisible the error div
             formError.Visible = false;
+            //check if someone's already logged in
+            if(Session["userId"] != null)
+                Response.Redirect("MyAccount.aspx"); //if yes, redirect to MyAccount
         }
 
         protected void UserLogin(object sender, EventArgs e)

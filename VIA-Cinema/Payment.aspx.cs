@@ -29,7 +29,7 @@ namespace VIA_Cinema
             {
                 saveCardWrapper.Visible = false;
                 savedCardsWrapper.InnerHtml = "<p style=\"font-size: 12px\"><a href=\"Account/LogIn.aspx?redirect=../Payment.aspx\""+
-                    "class=\"btn btn-primary\">Log In</a><br />to see your saved cards, or to save a new one!</p>";
+                    "class=\"btn btn-primary\">Log In</a><br />to see your saved cards and to save the booking into your account</p>";
             }
 
             //take the seats chosen and the showId
@@ -69,7 +69,7 @@ namespace VIA_Cinema
             if (Session["userId"] == null)
             {
                 //add a "message" at the end of the drop down text
-                savedCards.Items[0].Text += " (you need to be logged in)";
+                savedCards.Items[0].Text += " (you must be logged in)";
                 //and disable it
                 savedCards.Enabled = false;
             }
