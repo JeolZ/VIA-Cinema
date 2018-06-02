@@ -15,12 +15,13 @@ namespace VIA_Cinema.WebService
         public string ReleaseDate { get; set; }
         public Show[] Shows { get; set; }
         public string Cover { get; set; }
+        public string Trailer { get; set; }
 
         public Movie()
         {
         }
 
-        public Movie(int id, string t, string d, int dur, string rd, string c, Show[] s)
+        public Movie(int id, string t, string d, int dur, string rd, string c, string tr, Show[] s)
         {
             Id = id;
             Title = t;
@@ -28,6 +29,7 @@ namespace VIA_Cinema.WebService
             Duration = dur;
             ReleaseDate = rd;
             Cover = c;
+            Trailer = tr;
             Shows = s;
         }
     }

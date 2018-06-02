@@ -26,6 +26,7 @@
           <s:element minOccurs="0" maxOccurs="1" name="ReleaseDate" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Shows" type="tns:ArrayOfShow" />
           <s:element minOccurs="0" maxOccurs="1" name="Cover" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Trailer" type="s:string" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="ArrayOfShow">

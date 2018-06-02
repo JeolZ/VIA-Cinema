@@ -249,6 +249,8 @@ namespace VIA_Cinema.localhost {
         
         private string coverField;
         
+        private string trailerField;
+        
         /// <remarks/>
         public int Id {
             get {
@@ -316,6 +318,16 @@ namespace VIA_Cinema.localhost {
             }
             set {
                 this.coverField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Trailer {
+            get {
+                return this.trailerField;
+            }
+            set {
+                this.trailerField = value;
             }
         }
     }

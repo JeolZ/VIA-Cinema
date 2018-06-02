@@ -1,8 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="ChooseSeats.aspx.cs" Inherits="VIA_Cinema.ChooseSeats" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <title>Book a seat</title>
+    <title>Book a seat for <%=title%></title>
     <!-- style to set up the table -->
     <style>
+        div.custom-header {
+            background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('<%=imgSrc%>') no-repeat fixed 50% 20%;
+            background-size: cover;
+        }
+        #headerContent_info {
+            color: white;
+        }
         table.seats{
             margin: 10px auto;
             text-align: center;

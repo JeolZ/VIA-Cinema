@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -10,6 +13,7 @@ namespace VIA_Cinema
 {
     public partial class Movie : System.Web.UI.Page
     {
+        public string imgSrc;
         protected void Page_Load(object sender, EventArgs e)
         {
             //if there is no movieId passed, redirect to the main page
@@ -28,6 +32,7 @@ namespace VIA_Cinema
             //show the image
             image.ImageUrl = m.Cover;
             image.CssClass = "movieImage";
+            imgSrc = m.Cover;
             //set the title, description and other info
             title.Text = m.Title;
             description.Text = m.Description;
@@ -73,7 +78,7 @@ namespace VIA_Cinema
                     else
                         cssClass += "btn-secondary active";
                     //add a button with the time, which is linked to the booking page
-                    days[i].InnerHtml += "<a data-toggle=\"tooltip\" class=\""+cssClass+"\" href=\"ChooseSeats.aspx?showId=" + s.Id
+                    days[i].InnerHtml += "<a data-toggle=\"tooltip\" class=\"" + cssClass + "\" href=\"ChooseSeats.aspx?showId=" + s.Id
                                             + "\" style=\"font-size: 12px; margin: 2px;\" title=\"Room " + s.Room + ": " + s.AvailableSeats + " seats left\">" +
                                             s.Date.Hour + ":" + s.Date.Minute.ToString("00") + "</a>";
                 }
@@ -87,6 +92,65 @@ namespace VIA_Cinema
                     showsWrapper.InnerHtml = "<h4><small>Coming soon!</small></h4>";
                 else
                     showsWrapper.InnerHtml = "<h4><small>No shows planned this week.</small></h4>";
+            }
+
+            /*SETUP THE SLIDESHOW*/
+            //set a counter
+            int count = 0;
+            selectors.InnerHtml = "";
+            images.InnerHtml = "";
+            if (!m.Trailer.Equals(""))
+            {
+                selectors.InnerHtml += "<li data-target=\"#carouselExampleIndicators\" data-slide-to=\"" + count + "\" class=\"active\"></ li>";
+                count++;
+                images.InnerHtml += "<div class=\"carousel-item active\">" +
+                "<iframe src=\"//www.youtube.com/embed/"+m.Trailer+"\"></iframe></div>";
+                carousel_title.InnerText = "Trailer";
+            }
+
+
+            //db connection
+            SqlConnection conn = new SqlConnection(
+              ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
+            conn.Open();
+            //command
+            SqlCommand cmd = conn.CreateCommand();
+            //set the query to get all pictures
+            cmd.CommandText = @"SELECT src FROM Gallery WHERE MovieId=@movie";
+            //set the parameters
+            cmd.Parameters.Add("@movie", SqlDbType.Int);
+            cmd.Parameters["@movie"].Value = movieId;
+            //read the result
+            using (var rd = cmd.ExecuteReader(System.Data.CommandBehavior.SequentialAccess))
+            {
+                while (rd.Read())
+                {
+                    selectors.InnerHtml += "<li data-target=\"#carouselExampleIndicators\" data-slide-to=\"" + count + "\"";
+                    if (count == 0)
+                        selectors.InnerHtml += " class=\"active\" ";
+                    selectors.InnerHtml+="></ li>";
+                    count++;
+                    images.InnerHtml += "<div class=\"carousel-item\"><img class=\"d-block w-100";
+                    if (count == 1)
+                        images.InnerHtml += " active";
+                    images.InnerHtml += "\" src=\"" + rd["src"] + "\" alt=\"\"></div>";
+                }
+            }
+            //if there are no pictures neither trailer
+            if (count == 0)
+            {
+                //hide the slideshow (carousel)
+                carousel_title.Visible = false;
+                carousel_wrapper.Visible = false;
+            }else if (count > 1)
+            {
+                carousel_title.InnerText = "Gallery";
+            }
+            else
+            {
+                selectors.Visible = false;
+                prev.Visible = false;
+                next.Visible = false;
             }
         }
     }

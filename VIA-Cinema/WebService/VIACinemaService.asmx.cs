@@ -71,7 +71,8 @@ namespace VIA_Cinema.WebService
                                     M.Description AS Description,
                                     M.Duration AS Duration,
                                     M.ReleaseDate AS ReleaseDate,
-                                    M.Cover AS Cover";
+                                    M.Cover AS Cover,
+                                    M.Trailer AS Trailer";
 
             if(id<=0 && days < 0) // if we want just all the movies (without the shows)
             {
@@ -127,13 +128,27 @@ namespace VIA_Cinema.WebService
                         //save the current Id, we'll need it later
                         int preId = curId;
 
+                        //retrieve values
+                        string  title = rd["Title"].ToString(),
+                                description = rd["Description"].ToString();
+                        int duration = Int32.Parse(rd["Duration"].ToString());
+                        string  relDate = rd["ReleaseDate"].ToString().Substring(0, 10),
+                                cover = rd["Cover"].ToString(),
+                                trailer = "";
+                        //we don't know if trailer is null
+                        try
+                        {
+                            trailer = rd["Trailer"].ToString();
+                        }catch{}
+
                         //create the Movie object
                         Movie m = new Movie(curId,
-                                            rd["Title"].ToString(),
-                                            rd["Description"].ToString(),
-                                            Int32.Parse(rd["Duration"].ToString()),
-                                            rd["ReleaseDate"].ToString().Substring(0, 10),
-                                            rd["Cover"].ToString(),
+                                            title,
+                                            description,
+                                            duration,
+                                            relDate,
+                                            cover,
+                                            trailer,
                                             null);
 
                         //if we want the shows

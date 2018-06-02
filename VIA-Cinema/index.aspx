@@ -5,7 +5,6 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="headerContent" runat="server">
-   
     <h1>Welcome to the VIA Cinema</h1>
     <h3><small>The web portal to keep updated about the shown movies and book a seat whenever you want.</small></h3>
 </asp:Content>

@@ -13,10 +13,10 @@
 
 <asp:Content ID="Content4" ContentPlaceHolderID="mainContent" runat="server">
     <div class="row">
-        <div class="col-10">
+        <div class="col-md-10 col-sm-12">
             <h3>All the movies:</h3>
         </div>
-        <div class="col-2">
+        <div class="col-md-2 col-sm-12">
             <div class="btn-group">
               <a href="WhatsOn.aspx" class="btn btn-secondary">Week</a>
               <a href="#" class="btn btn-primary active">All</a>
@@ -25,10 +25,10 @@
     </div>
 
     <div class="row">
-        <div class="col-9" id="movieList" runat="server">
+        <div class="col-md-9 col-sm-12" id="movieList" runat="server">
 
         </div>
-        <div class="col-3">
+        <div class="col-md-3 col-sm-12">
             <h4>Categories:</h4>
         </div>
     </div>

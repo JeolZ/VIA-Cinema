@@ -16,7 +16,7 @@ namespace VIA_Cinema
         //global attributes
         Dictionary<string, CheckBox> seatsCheck = new Dictionary<string, CheckBox>();
         float price;
-        string title, date;
+        public string title, date, imgSrc;
         int room;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -42,13 +42,14 @@ namespace VIA_Cinema
                                         MAX(Se.LocationX) AS maxX,
                                         S.Price AS Price,
                                         M.Title AS Title,
+                                        M.Cover AS Cover,
                                         S.RoomId AS Room,
                                         S.Date AS Date
                                 FROM Shows AS S, Seats AS Se, Movies AS M
                                 WHERE S.ShowId=@showId
                                     AND S.RoomId = Se.RoomId
                                     AND S.MovieId = M.MovieId
-                                GROUP BY Se.RoomId, S.Price, M.Title, S.RoomId, S.Date";
+                                GROUP BY Se.RoomId, S.Price, M.Title, M.Cover, S.RoomId, S.Date";
             //set the parameters
             cmd.Parameters.Add("@showId", SqlDbType.Int);
             cmd.Parameters["@showId"].Value = showId;
@@ -62,6 +63,7 @@ namespace VIA_Cinema
                     maxX = Convert.ToInt32(rd["maxX"]);
                     price = float.Parse(rd["Price"].ToString());
                     title = rd["Title"].ToString();
+                    imgSrc = rd["Cover"].ToString();
                     room = Convert.ToInt32(rd["Room"].ToString());
                     date = rd["Date"].ToString().Substring(0, 16);
                 }

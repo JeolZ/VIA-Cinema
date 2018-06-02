@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Movie.aspx.cs" Inherits="VIA_Cinema.Movie" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <title>Movie details</title>
+    <title><%=title.Text%></title>
     <!--style for the image-->
     <style>
         img.movieImage {
@@ -11,12 +11,33 @@
             margin-top: -80px;
             box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
+        
+        #mainContent_carousel_wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 56.5%;
+        }
+
+        .carousel, .carousel-inner, .carousel-item {
+            position: absolute !important; 
+            top: 0;
+            bottom: 0; 
+            left: 0;
+            right: 0;
+            height: 100% !important;
+        }
+
+        iframe {
+            width: 100% !important;
+            height: 100% !important;
+        }
 
         div.custom-header {
-            background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('images/movies/avengers.jpg') no-repeat fixed 50% 10%;
+            background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('<%=imgSrc%>') no-repeat fixed 50% 20%;
             background-size: cover;
             height: 350px;
         }
+
         @media(max-width:767px) {
             h1.title {
                 color: #0c0c0c;
@@ -62,6 +83,24 @@
             <p style="font-size: 12px;">
                 Realeased on: <asp:Label ID="relDate" runat="server" Text=""></asp:Label>
             </p>
+
+            <h3 id="carousel_title" style="margin-top: 50px;" runat="server">Gallery</h3>
+            <div id="carousel_wrapper" runat="server">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+              <ol id="selectors" class="carousel-indicators" runat="server">
+              </ol>
+              <div id="images" class="carousel-inner" runat="server">
+              </div>
+              <a id="prev" runat="server" class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a id="next" runat="server" class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+        </div>
         </div>
         <!--shows info (for the week)-->
         <div class="col-md-5 col-sd-12" style="padding: 50px;">
@@ -108,6 +147,9 @@
     <script>
         $(document).ready(function(){
             $('[data-toggle="tooltip"]').tooltip(); 
+            $('.carousel').carousel({
+                interval: false
+            });
         });
     </script>
 </asp:Content>
