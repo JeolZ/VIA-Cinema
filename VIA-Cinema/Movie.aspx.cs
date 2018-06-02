@@ -62,9 +62,14 @@ namespace VIA_Cinema
                 days[i].InnerHtml = "";
                 foreach (var s in shows)
                 {
+                    string cssClass = "btn ";
+                    if (s.AvailableSeats > 0)
+                        cssClass += "btn-primary";
+                    else
+                        cssClass += "btn-secondary active";
                     //add a button with the time, which is linked to the booking page
-                    days[i].InnerHtml += "<a data-toggle=\"tooltip\" class=\"btn btn-primary\" href=\"ChooseSeats.aspx?showId=" + s.Id
-                                            + "\" style=\"font-size: 12px; margin: 2px;\" title=\"Room " + s.Room + "\">" +
+                    days[i].InnerHtml += "<a data-toggle=\"tooltip\" class=\""+cssClass+"\" href=\"ChooseSeats.aspx?showId=" + s.Id
+                                            + "\" style=\"font-size: 12px; margin: 2px;\" title=\"Room " + s.Room + ": " + s.AvailableSeats + " seats left\">" +
                                             s.Date.Hour + ":" + s.Date.Minute.ToString("00") + "</a>";
                 }
             }

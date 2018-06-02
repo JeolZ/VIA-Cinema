@@ -51,9 +51,16 @@ namespace VIA_Cinema
                     days[i].InnerHtml += "<p class=\"card-text\">" + m.Description.Substring(0, 250) + "...</p>";
                     days[i].InnerHtml += "<p style=\"font-size: 12px\">Duration: " + m.Duration + "'</p>";
                     foreach (var s in m.Shows)
-                        days[i].InnerHtml += "<a data-toggle=\"tooltip\" class=\"btn btn-primary\" href=\"ChooseSeats.aspx?showId=" + s.Id
-                                                + "\" style=\"font-size: 12px; margin: 2px;\" title=\"Room "+s.Room+"\">" +
-                                                s.Date.Hour + ":" + s.Date.Minute.ToString("00")+"</a>";
+                    {
+                        string cssClass = "btn ";
+                        if (s.AvailableSeats > 0)
+                            cssClass += "btn-primary";
+                        else
+                            cssClass += "btn-secondary active";
+                        days[i].InnerHtml += "<a data-toggle=\"tooltip\" class=\""+cssClass+"\" href=\"ChooseSeats.aspx?showId=" + s.Id
+                                                + "\" style=\"font-size: 12px; margin: 2px;\" title=\"Room " + s.Room + ": " + s.AvailableSeats + " seats left\">" +
+                                                s.Date.Hour + ":" + s.Date.Minute.ToString("00") + "</a>";
+                    }
                     days[i].InnerHtml += "</div></div></div></div>";
                 }
             }

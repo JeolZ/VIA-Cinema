@@ -38,7 +38,7 @@
           <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
           <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:dateTime" />
           <s:element minOccurs="1" maxOccurs="1" name="Room" type="s:int" />
-          <s:element minOccurs="1" maxOccurs="1" name="TotalSeats" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="AvailableSeats" type="s:int" />
         </s:sequence>
       </s:complexType>
       <s:element name="Get_x0020_shows_x0020_of_x0020_all_x0020_movies_x0020_of_x0020__x0022_day_x0022__x0020_days_x0020_from_x0020_today">

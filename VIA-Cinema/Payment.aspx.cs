@@ -28,7 +28,8 @@ namespace VIA_Cinema
             if (Session["userId"] == null)
             {
                 saveCardWrapper.Visible = false;
-                savedCardsWrapper.Visible = false;
+                savedCardsWrapper.InnerHtml = "<p style=\"font-size: 12px\"><a href=\"Account/LogIn.aspx?redirect=../Payment.aspx\""+
+                    "class=\"btn btn-primary\">Log In</a><br />to see your saved cards, or to save a new one!</p>";
             }
 
             //take the seats chosen and the showId
@@ -59,6 +60,20 @@ namespace VIA_Cinema
 
             summary.Text = summ;
 
+            //put the first item into the drop down list for the saved cards
+            ListItem li = new ListItem();
+            li.Value = "None";
+            li.Text = "Select one of your saved cards";
+            savedCards.Items.Add(li);
+            //if the user is not logged in
+            if (Session["userId"] == null)
+            {
+                //add a "message" at the end of the drop down text
+                savedCards.Items[0].Text += " (you need to be logged in)";
+                //and disable it
+                savedCards.Enabled = false;
+            }
+
             //if it's logged in
             if (Session["userId"] != null)
             {
@@ -75,12 +90,6 @@ namespace VIA_Cinema
                 cmd.Parameters.Add("@userId", SqlDbType.Int);
                 cmd.Parameters["@userId"].Value = Convert.ToInt32(Session["userId"]);
 
-                //put the first item into the drop down list
-                ListItem li = new ListItem();
-                li.Value = "None";
-                li.Text = "None";
-                savedCards.Items.Add(li);
-                
                 //read the results
                 using (var rd = cmd.ExecuteReader(System.Data.CommandBehavior.SequentialAccess))
                 {

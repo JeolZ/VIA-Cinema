@@ -71,8 +71,11 @@ namespace VIA_Cinema.Account
                     if (Convert.ToBoolean(cmd.ExecuteScalar()))
                         Session["admin"] = true;
 
-                    //redirect to MyAccount
-                    Response.Redirect("MyAccount.aspx");
+                    //redirect to the "redirect" value as get
+                    if(Request.QueryString["redirect"] != null)
+                        Response.Redirect(Request.QueryString["redirect"].ToString());
+                    else //or to MyAccount if "redirect" is not set
+                        Response.Redirect("MyAccount.aspx");
                 }
             }
             //if we're still here, then there are some errors. Then show them

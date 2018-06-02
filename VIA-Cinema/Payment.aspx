@@ -26,10 +26,9 @@
     <div class="alert alert-danger" id="formError" runat="server">
     </div>
     
-    <!--drop-down list for the saved cards (visible only if logged in)-->
-    <div class="form-group" id="savedCardsWrapper" runat="server">
-        <h4>Old saved (non-expired) credit cards: </h4>
-        <asp:dropdownlist runat="server" id="savedCards" CssClass="form-control"></asp:dropdownlist>
+    <!--drop-down list for the saved cards (enabled only if logged in)-->
+    <asp:dropdownlist runat="server" id="savedCards" CssClass="form-control"></asp:dropdownlist>
+    <div class="form-group" id="savedCardsWrapper" runat="server" style="text-align: center">
     </div>
 
     <!--fields to use a new credit card-->

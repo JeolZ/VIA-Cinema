@@ -41,7 +41,7 @@ namespace VIA_Cinema.Account
             //set log out and (maybe) admin button
             log.InnerHtml = "<a href = \"LogOut.aspx\" class=\"btn btn-primary\">Log out</a>";
             if (Session["admin"] != null && Convert.ToBoolean(Session["admin"]))
-                log.InnerHtml += "<br /><a href = \"../Administration/admin.aspx\" class=\"btn btn-secondary\">Administration</a>";
+                log.InnerHtml += "<br /><a href = \"../Administration/Admin.aspx\" class=\"btn btn-secondary\">Administration</a>";
 
             //retrieve active bookings
             //db connection

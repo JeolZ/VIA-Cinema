@@ -24,7 +24,8 @@ namespace VIA_Cinema
             {
                 //...then show "Log In" instead of "My Account"
                 Menu1.Items[0].ChildItems[3].Text = "Log in";
-                Menu1.Items[0].ChildItems[3].NavigateUrl = "~/Account/LogIn.aspx";
+                //and set the Url to LogIn with redirect back to the current page
+                Menu1.Items[0].ChildItems[3].NavigateUrl = "~/Account/LogIn.aspx?redirect="+Request.RawUrl;
             }
             else
                 ++count;

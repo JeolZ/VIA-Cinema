@@ -11,7 +11,7 @@ namespace VIA_Cinema.WebService
         public int Id { get; set; }
         public DateTime Date { get; set; }
         public int Room { get; set; }
-        public int TotalSeats { get; set; }
+        public int AvailableSeats { get; set; }
 
         public Show()
         {
@@ -22,7 +22,7 @@ namespace VIA_Cinema.WebService
             Id = id;
             Date = d;
             Room = r;
-            TotalSeats = ts;
+            AvailableSeats = ts;
         }
     }
 }

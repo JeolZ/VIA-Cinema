@@ -144,11 +144,24 @@ namespace VIA_Cinema.WebService
                                 int showId = Int32.Parse(rd["ShowID"].ToString());
                                 DateTime date = DateTime.ParseExact(rd["Date"].ToString(), "dd/MM/yyyy HH:mm:ss",
                                     System.Globalization.CultureInfo.InvariantCulture);
+                                int roomId = Int32.Parse(rd["RoomId"].ToString());
+
+                                //total seats
+                                var cmd2 = conn.CreateCommand();
+                                cmd2.CommandText = @"SELECT COUNT(*) FROM Seats WHERE RoomId=@room GROUP BY RoomId";
+                                cmd2.Parameters.Add("@room", SqlDbType.Int);
+                                cmd2.Parameters["@room"].Value = roomId;
+                                int totSeats = Convert.ToInt32(cmd2.ExecuteScalar());
+                                cmd2.CommandText = @"SELECT COUNT(*) FROM Reservations WHERE ShowId=@show GROUP BY ShowId";
+                                cmd2.Parameters.Add("@show", SqlDbType.Int);
+                                cmd2.Parameters["@show"].Value = showId;
+                                int availableSeats = totSeats - Convert.ToInt32(cmd2.ExecuteScalar());
+
                                 //add to the list the Show Object
                                 shows.Add(new Show(showId,
                                                     date,
-                                                    Int32.Parse(rd["RoomId"].ToString()),
-                                                    -1
+                                                    roomId,
+                                                    availableSeats
                                                   ));
                             } while ((more = rd.Read()) && (curId = Int32.Parse(rd["MovieID"].ToString())) == preId);
                             //save the show list to the movie object

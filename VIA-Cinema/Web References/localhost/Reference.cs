@@ -334,7 +334,7 @@ namespace VIA_Cinema.localhost {
         
         private int roomField;
         
-        private int totalSeatsField;
+        private int availableSeatsField;
         
         /// <remarks/>
         public int Id {
@@ -367,12 +367,12 @@ namespace VIA_Cinema.localhost {
         }
         
         /// <remarks/>
-        public int TotalSeats {
+        public int AvailableSeats {
             get {
-                return this.totalSeatsField;
+                return this.availableSeatsField;
             }
             set {
-                this.totalSeatsField = value;
+                this.availableSeatsField = value;
             }
         }
     }
