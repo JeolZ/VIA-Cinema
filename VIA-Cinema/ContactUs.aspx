@@ -24,6 +24,11 @@
             border-radius: 30px 30px 0 0;
             margin: 0 auto;
         }
+        @media(max-width:767px) {
+            .map-Wrapper {
+                padding-top: 50% !important;
+            }
+        }
     </style>
 </asp:Content>
 
