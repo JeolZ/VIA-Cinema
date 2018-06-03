@@ -47,7 +47,7 @@
                 <p>If you want to contact us, please use the following data (the contact form doesn't work):</p>
 
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
+                    <li class="list-group-item" style="border-top: 0">
                         <strong>Address:</strong>
                         <span>Chr M Østergaards Vej 4, 8700 Horsens, Denmark</span>
                     </li>
