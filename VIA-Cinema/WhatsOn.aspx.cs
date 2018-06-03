@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -48,6 +51,12 @@ namespace VIA_Cinema
                     days[i].InnerHtml += "<div class=\"card-body\">";
                     days[i].InnerHtml += "<a href=\"Movie.aspx?movieId=" + m.Id + "\">";
                     days[i].InnerHtml += "<h4 class=\"card-title\">" + m.Title + "</h4></a>";
+                    string cat = "";
+                    foreach (var c in m.Categories)
+                    {
+                        cat += ", " + c;
+                    }
+                    days[i].InnerHtml += "<p style=\"font-size: 12px\">" + cat.Substring(2) + "</p>";
                     days[i].InnerHtml += "<p class=\"card-text\">" + m.Description.Substring(0, 250) + "...</p>";
                     days[i].InnerHtml += "<p style=\"font-size: 12px\">Duration: " + m.Duration + "'</p>";
                     foreach (var s in m.Shows)

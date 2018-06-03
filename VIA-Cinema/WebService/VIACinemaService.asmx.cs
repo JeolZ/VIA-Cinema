@@ -148,14 +148,35 @@ namespace VIA_Cinema.WebService
                                             duration,
                                             relDate,
                                             cover,
-                                            trailer,
-                                            null);
+                                            trailer);
+
+                        //get categories
+                        var cmd2 = conn.CreateCommand();
+                        cmd2.CommandText = @"SELECT C.Name AS Cat 
+                                             FROM Categories AS C, MovieXCategory AS MC 
+                                             WHERE C.CategoryId=MC.CategoryId 
+                                                AND MC.MovieId=@movie";
+                        cmd2.Parameters.Add("@movie", SqlDbType.Int);
+                        cmd2.Parameters["@movie"].Value = curId;
+
+                        List<string> categories = new List<string>();
+                        //read the result
+                        using (var rd2 = cmd2.ExecuteReader(System.Data.CommandBehavior.SequentialAccess))
+                        {
+                            while (rd2.Read())
+                                categories.Add(rd2["Cat"].ToString());
+                        }
+
+                        m.Categories = categories.ToArray();
 
                         //if we want the shows
                         if (days >= 0)
                         {
                             //read until the curId is the same (now we need preId)
                             List<Show> shows = new List<Show>();
+                            cmd2.Parameters.Add("@room", SqlDbType.Int);
+                            cmd2.Parameters.Add("@show", SqlDbType.Int);
+                            cmd2.Parameters["@show"].Value = 0;
                             do
                             {
                                 //read show data
@@ -165,13 +186,10 @@ namespace VIA_Cinema.WebService
                                 int roomId = Int32.Parse(rd["RoomId"].ToString());
 
                                 //total seats
-                                var cmd2 = conn.CreateCommand();
                                 cmd2.CommandText = @"SELECT COUNT(*) FROM Seats WHERE RoomId=@room GROUP BY RoomId";
-                                cmd2.Parameters.Add("@room", SqlDbType.Int);
                                 cmd2.Parameters["@room"].Value = roomId;
                                 int totSeats = Convert.ToInt32(cmd2.ExecuteScalar());
                                 cmd2.CommandText = @"SELECT COUNT(*) FROM Reservations WHERE ShowId=@show GROUP BY ShowId";
-                                cmd2.Parameters.Add("@show", SqlDbType.Int);
                                 cmd2.Parameters["@show"].Value = showId;
                                 int availableSeats = totSeats - Convert.ToInt32(cmd2.ExecuteScalar());
 
@@ -191,6 +209,8 @@ namespace VIA_Cinema.WebService
                     }
                 }
             }
+            //close connection
+            conn.Close();
 
             //return the array of movies
             return t.ToArray();

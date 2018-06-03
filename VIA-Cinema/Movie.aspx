@@ -39,7 +39,7 @@
         }
 
         @media(max-width:767px) {
-            h1.title {
+            .title {
                 color: #0c0c0c;
                 text-align: center;
             }
@@ -48,7 +48,7 @@
             }
         }
         @media(min-width:768px) {
-            h1.title {
+            .title {
                 color: #FFF;
             }
         }
@@ -68,6 +68,7 @@
         </div>
         <div class="col-md-8 col-sm-12">
             <h1 class="title"><asp:Label ID="title" runat="server" Text=""></asp:Label></h1>
+            <h5 class="title"><small><asp:Label ID="categories" runat="server" Text=""></asp:Label></small></h5>
         </div>
     </div>
     <div class="row">

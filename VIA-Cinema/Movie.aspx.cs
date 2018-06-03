@@ -152,6 +152,14 @@ namespace VIA_Cinema
                 prev.Visible = false;
                 next.Visible = false;
             }
+
+            //print categories
+            categories.Text = "";
+            foreach(var c in m.Categories)
+            {
+                categories.Text += ", "+c;
+            }
+            categories.Text = categories.Text.Substring(2);
         }
     }
 }

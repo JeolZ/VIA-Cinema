@@ -1,6 +1,18 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Movies.aspx.cs" Inherits="VIA_Cinema.Movies" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>What's on</title>
+    <style>
+        @media(max-width:767px) {
+            #mainContent_movieList {
+                padding: initial;
+            }
+        }
+        @media(min-width:768px) {
+            #mainContent_movieList {
+                padding: 0 50px ;
+            }
+        }
+    </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="headerContent" runat="server">
@@ -24,12 +36,5 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-9 col-sm-12" id="movieList" runat="server">
-
-        </div>
-        <div class="col-md-3 col-sm-12">
-            <h4>Categories:</h4>
-        </div>
-    </div>
+    <div id="movieList" runat="server"></div>
 </asp:Content>

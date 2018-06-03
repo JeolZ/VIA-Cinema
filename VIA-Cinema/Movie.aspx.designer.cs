@@ -31,6 +31,15 @@ namespace VIA_Cinema {
         protected global::System.Web.UI.WebControls.Label title;
         
         /// <summary>
+        /// categories control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label categories;
+        
+        /// <summary>
         /// description control.
         /// </summary>
         /// <remarks>
