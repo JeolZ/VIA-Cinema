@@ -9,5 +9,10 @@
     <small>Thank you for the purchase! See you soon!</small>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="mainContent" runat="server">
-    <h3><small>You are going to be redirected to the Home Page...</small></h3>
+    <h3><small>Your Reservation ID is </small>
+        <asp:Label ID="id" runat="server" Text=""></asp:Label></h3>
+    <br />
+    <div style="text-align: center">
+        <a href="index.aspx" class="btn btn-primary">Go to the Homepage</a>
+    </div>
 </asp:Content>

@@ -27,14 +27,16 @@ namespace VIA_Cinema.Account
         protected void Page_Load(object sender, EventArgs e)
         {
             //if it's not logged in, redirect to the login
-            if(Session["userId"]==null)
+            if (Session["userId"] == null)
                 Response.Redirect("Login.aspx");
 
             //hide the error divs
             formError1.Visible = false;
             formError2.Visible = false;
+            resError.Visible = false;
             newCardError.Visible = false;
-            
+
+
             //set up the hi message
             hi.Text = "Hi, " + Session["name"];
 
@@ -51,11 +53,12 @@ namespace VIA_Cinema.Account
             //command
             SqlCommand cmd = conn.CreateCommand();
             //set the query
-            cmd.CommandText = @"SELECT S.ShowId AS ShowId, COUNT(*) AS seat, S.Date AS Date, S.RoomId AS Room, M.Title AS Title 
+            cmd.CommandText = @"SELECT R.ReservationId AS ResId, S.ShowId AS ShowId,
+                                   COUNT(*) AS seat, S.Date AS Date, S.RoomId AS Room, M.Title AS Title 
                                 FROM Reservations AS R, Shows AS S, Movies AS M 
                                 WHERE R.ShowId = S.ShowId AND S.MovieId = M.MovieId 
                                     AND UserId = @id AND S.Date > GETDATE( )
-                                GROUP BY S.ShowId, S.Date, S.RoomId, M.Title";
+                                GROUP BY S.ShowId, S.Date, S.RoomId, M.Title, R.ReservationId";
             //set the parameters
             cmd.Parameters.Add("@id", SqlDbType.Int);
             cmd.Parameters["@id"].Value = Session["userId"];
@@ -63,31 +66,40 @@ namespace VIA_Cinema.Account
             //read the result
             using (var rd = cmd.ExecuteReader(System.Data.CommandBehavior.SequentialAccess))
             {
-                int i = 0;
+                int i = 1;
                 while (rd.Read())
                 {
                     //get showId, seat count, date, room and title
+                    string resId = rd["ResId"].ToString();
                     int showId = Convert.ToInt32(rd["ShowId"].ToString());
                     int seats = Convert.ToInt32(rd["seat"].ToString());
                     string date = rd["Date"].ToString().Substring(0, 16);
                     string room = rd["Room"].ToString();
                     string title = rd["Title"].ToString();
-                    
+
                     //add a new row to the table
                     bookingsList.Rows.Add(new HtmlTableRow());
-                    
+
                     //add a cell with a summary of the reservation
                     HtmlTableCell cell = new HtmlTableCell();
-                    cell.InnerHtml = seats + " seats reserved for <b>" + title + "</b> on " + date + " in Room " + room + ".";
+                    cell.InnerHtml = "<b>" + resId + "</b>";
+                    bookingsList.Rows[i].Cells.Add(cell);
+
+                    cell = new HtmlTableCell();
+                    if (seats > 1)
+                        cell.InnerHtml = seats + " seats ";
+                    else
+                        cell.InnerHtml = seats + " seat ";
+                    cell.InnerHtml += "reserved for <b>" + title + "</b> on " + date + " in Room " + room + ".";
                     bookingsList.Rows[i].Cells.Add(cell);
 
                     //add a cell with a "delete" button to delete the reservation
                     cell = new HtmlTableCell();
-                    cell.InnerHtml = "<a class=\"btn btn-primary\" href=\"DeleteBooking.aspx?showId=" + showId + "\">Delete</a>";
+                    cell.InnerHtml = "<a class=\"btn btn-primary\" href=\"DeleteBooking.aspx?resId=" + resId + "\">Delete</a>";
                     bookingsList.Rows[i].Cells.Add(cell);
                     i++;
                 }
-                if (i == 0) //if there are no records, print this message
+                if (i == 1) //if there are no records, print this message
                     bookingsListWrapper.InnerHtml = "<i>No bookings found</i>";
             }
 
@@ -281,7 +293,7 @@ namespace VIA_Cinema.Account
 
             string err = "";
             //if an old and a new passwords have been typed
-            if(!pswOld.Equals("") && !password.Equals(""))
+            if (!pswOld.Equals("") && !password.Equals(""))
             {
                 //try to see if the password is correct
                 //set the query
@@ -318,7 +330,7 @@ namespace VIA_Cinema.Account
 
                         //close connection
                         conn.Close();
-                        
+
                         //refresh the page
                         Response.Redirect(Request.RawUrl);
                     }
@@ -326,13 +338,75 @@ namespace VIA_Cinema.Account
             }
 
             //if there are some errors, show them
-            if(!err.Equals(""))
+            if (!err.Equals(""))
             {
                 formError2.InnerHtml = "<p>" + err + "</p>";
                 formError2.Visible = true;
             }
             //close connection
             conn.Close();
+        }
+
+        protected void RetrieveReservation(object sender, EventArgs e)
+        {
+            //hide Error (we'll be show it later if necessary)
+            resError.Visible = false;
+            resError.InnerHtml = "";
+
+            Regex resId_valid = new Regex(@"^[A-Z\d]{6}$");
+            if (!resId_valid.Match(res_Id.Value).Success)
+                resError.InnerHtml = "<p>The inserted Reservation ID is not valid</p>";
+
+            Regex creditCard_valid = new Regex(@"^\d{16}$", RegexOptions.IgnoreCase);
+            if (!creditCard_valid.Match(res_CardN.Value).Success)
+                resError.InnerHtml += "<p>The inserted Credit Card Number is not valid</p>";
+
+            if (!resError.InnerHtml.Equals(""))
+            {
+                resError.Visible = true;
+                return;
+            }
+
+            //db connection
+            SqlConnection conn = new SqlConnection(
+                   ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
+            conn.Open();
+            //command
+            SqlCommand cmd = conn.CreateCommand();
+
+            cmd.CommandText = @"SELECT UserId FROM Reservations
+                                WHERE ReservationId=@resId AND CreditCardN=@card AND UserId IS NOT NULL";
+            cmd.Parameters.Add("@resId", SqlDbType.Char);
+            cmd.Parameters["@resId"].Value = res_Id.Value;
+            cmd.Parameters.Add("@card", SqlDbType.Char);
+            cmd.Parameters["@card"].Value = res_CardN.Value;
+
+            var res = cmd.ExecuteScalar();
+            if (res != null)
+            {
+
+                if (Convert.ToInt32(res.ToString()) != Convert.ToInt32(Session["UserId"]))
+                {
+                    resError.InnerHtml = "<p>The reservation seems to be already connected to another account."
+                        + " If you think there is an error, please contact us.</p>";
+                    resError.Visible = true;
+                }
+                return;
+            }
+
+            cmd.CommandText = @"UPDATE Reservations SET UserId=@user
+                                WHERE ReservationId=@resId AND CreditCardN=@card";
+            cmd.Parameters.Add("@user", SqlDbType.Int);
+            cmd.Parameters["@user"].Value = Convert.ToInt32(Session["UserId"]);
+
+            if (cmd.ExecuteNonQuery() == 0)
+            {
+                resError.InnerHtml = "<p>The reservation has not been found. Try again.</p>";
+                resError.Visible = true;
+            }
+
+            //refresh the page
+            Response.Redirect(Request.RawUrl);
         }
     }
 }

@@ -22,12 +22,35 @@
 
     
     <!-- booking management -->
-    <h4 data-toggle="collapse" data-target="#mainContent_bookingsListWrapper" style="cursor: pointer" title="click to show">Your active bookings:</h4>
-    <div id="bookingsListWrapper" runat="server" class="collapse">
+    <h4>Your active bookings:</h4>
+    <div id="bookingsListWrapper" runat="server">
     <table id="bookingsList" class="table table-hover" runat="server">
+        <thead>
+        <tr>
+            <th>Reservation</th>
+            <th>Details</th>
+            <th></th>
+        </tr>
+        </thead>
         <tbody>
         </tbody>
     </table>
+    </div>
+    <div class="jumbotron">
+        <!--error-->
+        <div class="alert alert-danger" id="resError" runat="server"></div>
+        <h4>Retrieve a booking</h4>
+        <!--Reservation ID-->
+        <div class="form-group">
+            <label for="name">Reservation ID:</label>
+            <input type="text" maxlength="6" class="form-control" id="res_Id" runat="server" placeholder="Enter the Reservation ID">
+        </div>
+        <!--Credit Card Number-->
+        <div class="form-group">
+            <label for="owner">Credit Card Number:</label>
+            <input type="text" maxlength="16" class="form-control" id="res_CardN" runat="server" placeholder="Enter the used Credit Card Number">
+        </div>
+        <asp:button runat="server" text="Retrieve" onclick="RetrieveReservation" class="btn btn-primary" />
     </div>
     <br /><br />
     
@@ -35,12 +58,8 @@
     <div class="alert alert-danger" id="newCardError" runat="server">
     </div>
     <!-- credit cards management -->
-    <h4 data-toggle="collapse" data-target="#mainContent_creditCardsWrapper" style="cursor: pointer" title="click to show">Your saved credit cards:</h4>
-    <div id="creditCardsWrapper" runat="server" class="collapse">
-    <table class="table table-hover">
-        <thead>
-        </thead>
-    </table>
+    <h4>Your saved credit cards:</h4>
+    <div id="creditCardsWrapper" runat="server">
     <table id="creditCards" class="table table-hover" runat="server">
         <thead>
         <tr>
@@ -53,7 +72,7 @@
     </table>
     <i id="creditCardsNotFound" runat="server"></i>
     <b data-toggle="collapse" data-target="#newCardWrapper" style="cursor: pointer">Click here to add a new one!</b>
-    <div id="newCardWrapper" class="collapse">
+    <div id="newCardWrapper" class="collapse jumbotron">
         <!--credit card number-->
         <div class="form-group">
             <label for="name">Credit Card Number:</label>
@@ -82,11 +101,11 @@
     <br /><br />
     
     <!-- edit personal data -->
-    <h4 data-toggle="collapse" data-target="#dataChange" style="cursor: pointer" title="click to show">Your data:</h4>
+    <h4>Your data:</h4>
     <!-- error -->
     <div class="alert alert-danger" id="formError1" runat="server">
     </div>
-    <div id="dataChange" class="collapse">
+    <div id="dataChange">
     <!-- email -->
     <div class="form-group">
         <label for="email">Email:</label>
@@ -108,11 +127,11 @@
     <br /><br />
 
     <!-- reset password -->
-    <h4 data-toggle="collapse" data-target="#passwordReset" style="cursor: pointer" title="click to show">Reset password:</h4>
+    <h4>Reset password:</h4>
     <!-- error -->
     <div class="alert alert-danger" id="formError2" runat="server">
     </div>
-    <div id="passwordReset" class="collapse">
+    <div id="passwordReset">
         <!-- old password -->
         <div class="form-group">
             <label for="pswOld">Old Password:</label>

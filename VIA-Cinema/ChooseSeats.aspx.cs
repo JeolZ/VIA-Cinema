@@ -49,6 +49,7 @@ namespace VIA_Cinema
                                 WHERE S.ShowId=@showId
                                     AND S.RoomId = Se.RoomId
                                     AND S.MovieId = M.MovieId
+                                    AND S.Date >= GETDATE ( )
                                 GROUP BY Se.RoomId, S.Price, M.Title, M.Cover, S.RoomId, S.Date";
             //set the parameters
             cmd.Parameters.Add("@showId", SqlDbType.Int);
@@ -56,6 +57,7 @@ namespace VIA_Cinema
             //read the result
             using (var rd = cmd.ExecuteReader(System.Data.CommandBehavior.SequentialAccess))
             {
+                //if there is a record
                 if (rd.Read())
                 {
                     //take the values
@@ -67,6 +69,8 @@ namespace VIA_Cinema
                     room = Convert.ToInt32(rd["Room"].ToString());
                     date = rd["Date"].ToString().Substring(0, 16);
                 }
+                else //else , redirect
+                    Response.Redirect("index.aspx");
             }
 
             //set the info Label

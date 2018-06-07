@@ -197,20 +197,27 @@ namespace VIA_Cinema
                 }
             }
 
+            cmd.CommandText = "SELECT MAX(ReservationId) FROM Reservations";
+            string resId = cmd.ExecuteScalar().ToString();
+
+            resId = ComputeNextID(resId);
+
             //insert into database the reservation (connected to the userId, if it's logged in)
-            string query = @"INSERT INTO Reservations (SeatN, ShowId, CreditCardN";
+            string query = @"INSERT INTO Reservations (ReservationId, SeatN, ShowId, CreditCardN";
             if (Session["userId"] != null)
                 query += ", UserId";
-            query += ") VALUES(@seat, @showId, @card";
+            query += ") VALUES(@resId, @seat, @showId, @card";
             if (Session["userId"] != null)
                 query += ", @userId";
             query += ");";
 
             //set the query and the parameters
             cmd.CommandText = query;
+            cmd.Parameters.Add("@resId", SqlDbType.Char);
             cmd.Parameters.Add("@seat", SqlDbType.VarChar);
             cmd.Parameters.Add("@showId", SqlDbType.Int);
             cmd.Parameters.Add("@card", SqlDbType.Char);
+            cmd.Parameters["@resId"].Value = resId;
             cmd.Parameters["@showId"].Value = showId;
             cmd.Parameters["@card"].Value = cardn.Value;
             if (Session["userId"] != null)
@@ -235,7 +242,35 @@ namespace VIA_Cinema
             Session["date"] = null;
 
             //redirect to the ThankYou page
-            Response.Redirect("ThankYou.aspx");
+            Response.Redirect("ThankYou.aspx?id="+resId);
+        }
+
+        private string ComputeNextID(string prevId)
+        {
+            char[] dig = new char[36];
+            for (char c = '0'; c <= '9'; c++)
+                dig[c - '0'] = c;
+            for (char c = 'A'; c <= 'Z'; c++)
+                dig[c - 'A' + 10] = c;
+
+            char[] curId = prevId.ToCharArray();
+            for(int i=prevId.Length-1; i>=0; i--)
+            {
+                if (prevId[i] < dig[9]) {
+                    curId[i] = (char)(prevId[i] + 1);
+                    break;
+                } else if (prevId[i] == dig[9]) {
+                    curId[i] = 'A';
+                    break;
+                } else if (prevId[i] < dig[35])
+                {
+                    curId[i] = (char)(prevId[i] + 1);
+                    break;
+                }
+                curId[i] = '0';
+            }
+
+            return new string(curId);
         }
     }
 }

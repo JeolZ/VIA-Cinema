@@ -29,6 +29,10 @@ namespace VIA_Cinema
             //get the movie info
             localhost.Movie m = via.GetMovieInfo(movieId);
 
+            //if no movie was found with this id
+            if(m==null) //redirect to index
+                Response.Redirect("index.aspx");
+
             //show the image
             image.ImageUrl = m.Cover;
             image.CssClass = "movieImage";

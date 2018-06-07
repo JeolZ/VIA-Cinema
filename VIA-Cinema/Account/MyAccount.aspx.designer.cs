@@ -49,6 +49,33 @@ namespace VIA_Cinema.Account {
         protected global::System.Web.UI.HtmlControls.HtmlTable bookingsList;
         
         /// <summary>
+        /// resError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl resError;
+        
+        /// <summary>
+        /// res_Id control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText res_Id;
+        
+        /// <summary>
+        /// res_CardN control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText res_CardN;
+        
+        /// <summary>
         /// newCardError control.
         /// </summary>
         /// <remarks>

@@ -100,8 +100,8 @@ namespace VIA_Cinema.WebService
                                 WHERE M.MovieID=S.MovieID";
                 if (days >= 0) //if we are searching for a specific day, select the date we want
                     query += " AND CONVERT(date, S.Date) = CONVERT(date, GETDATE( )+"+days+")";
-                else //else, just take all future movies
-                    query += " AND S.Date >= GETDATE( )";
+                //just take all future movies
+                query += " AND S.Date >= GETDATE( )";
 
                 //if we passed an id, take just the shows of the movie we want
                 if (id > 0)

@@ -19,7 +19,7 @@ namespace VIA_Cinema.Account
                 Response.Redirect("Login.aspx");
 
             //if there is the passed showId
-            if (Request.QueryString["showId"] != null)
+            if (Request.QueryString["resId"] != null)
             {
                 //delete the reservation
 
@@ -31,12 +31,12 @@ namespace VIA_Cinema.Account
                 SqlCommand cmd = conn.CreateCommand();
                 //set the query
                 cmd.CommandText = @"DELETE FROM Reservations
-                                    WHERE showId=@show AND userId=@user";
+                                    WHERE ReservationId=@resId AND userId=@user";
                 //set the parameters in the query
                 cmd.Parameters.Add("@user", SqlDbType.Int);
                 cmd.Parameters["@user"].Value = Session["userId"];
-                cmd.Parameters.Add("@show", SqlDbType.Int);
-                cmd.Parameters["@show"].Value = Convert.ToInt32(Request.QueryString["showId"]);
+                cmd.Parameters.Add("@resId", SqlDbType.Char);
+                cmd.Parameters["@resId"].Value =Request.QueryString["resId"];
                 //execute the query
                 cmd.ExecuteNonQuery();
             }
